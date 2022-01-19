@@ -9,3 +9,191 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model products {
+  id                 Int       @id @default(autoincrement())
+  style_code         String
+  name               String
+  category_id        Int
+  color_id           Int
+  gender_id          Int
+  normal_price       String
+  sale_rate          Float?
+  sale_price         String?
+  create_at          DateTime? @default(now())
+  is_member          Boolean   @default(false)
+  sub_icon_id        Int?
+  sub_brand_id       Int?
+  sub_clothes_id     Int?
+  sub_accessories_id Int?
+
+  categories         categories           @relation(fields: [category_id], references: [id])
+  product_colors     product_colors       @relation(fields: [color_id], references: [id])
+  product_genders    product_genders      @relation(fields: [gender_id], references: [id])
+  sub_icon           sub_icon?            @relation(fields: [sub_icon_id], references: [id])
+  sub_brand          sub_brand?           @relation(fields: [sub_brand_id], references: [id])
+  sub_clothes        sub_clothes?         @relation(fields: [sub_clothes_id], references: [id])
+  sub_accessories    sub_accessories?     @relation(fields: [sub_accessories_id], references: [id])
+  product_img_urls   product_img_urls[]
+  product_reviews    product_reviews[]
+  product_with_sizes product_with_sizes[]
+  carts              carts[]
+
+
+}
+
+model categories {
+  id               Int                @id @default(autoincrement())
+  name             String
+  products         products[]
+  snkrs            snkrs[]
+  product_img_urls product_img_urls[]
+  snkrs_img_urls   snkrs_img_urls[]
+}
+
+model users {
+  id              Int               @id @default(autoincrement())
+  email           String
+  password        String
+  name            String
+  phone           String
+  is_member       Boolean           @default(false)
+  created_at      DateTime?         @default(now())
+  product_reviews product_reviews[]
+  carts           carts[]
+  snkrs_data      snkrs_data[]
+}
+
+model product_reviews {
+  id         Int       @id @default(autoincrement())
+  style_code String
+  user_id    Int
+  color      Float
+  size       Float
+  comfort    Float
+  width      Float
+  create_at  DateTime? @default(now())
+  users      users     @relation(fields: [user_id], references: [id])
+  products   products  @relation(fields: [style_code], references: [style_code])
+}
+
+model carts {
+  id         Int       @id @default(autoincrement())
+  style_code String
+  user_id    Int
+  size       String
+  quantity   Int
+  create_at  DateTime? @default(now())
+  users      users     @relation(fields: [user_id], references: [id])
+  products   products  @relation(fields: [style_code], references: [style_code])
+}
+
+model snkrs {
+  id             Int              @id @default(autoincrement())
+  style_code     String
+  name           String
+  category_id    Int
+  color_id       Int
+  size_id        Int
+  gender_id      Int
+  price          String
+  quantity       Int
+  create_at      DateTime?        @default(now())
+  categories     categories       @relation(fields: [category_id], references: [id])
+  product_colors product_colors   @relation(fields: [color_id], references: [id])
+  snkrs_data     snkrs_data       @relation(fields: [style_code], references: [style_code])
+  snkrs_img_urls snkrs_img_urls[]
+}
+
+model snkrs_data {
+  id            Int           @id @default(autoincrement())
+  style_code    String
+  user_id       Int
+  size          String
+  create_at     DateTime?     @default(now())
+  snkrs         snkrs[]
+  users         users         @relation(fields: [user_id], references: [id])
+  snkrs_winners snkrs_winners @relation(fields: [id], references: [id])
+}
+
+model snkrs_winners {
+  id         Int          @id @default(autoincrement())
+  style_code String
+  user_id    Int
+  size       String
+  create_at  DateTime?    @default(now())
+  snkrs_data snkrs_data[]
+}
+
+model product_colors {
+  id        Int        @id @default(autoincrement())
+  name      String
+  color_hex String
+  products  products[]
+  snkrs     snkrs[]
+}
+
+model product_genders {
+  id       Int        @id @default(autoincrement())
+  name     String
+  products products[]
+}
+
+model product_with_sizes {
+  id              Int           @id @default(autoincrement())
+  style_code      String
+  product_size_id Int
+  quantity        Int
+  product_sizes   product_sizes @relation(fields: [product_size_id], references: [id])
+  products        products      @relation(fields: [style_code], references: [style_code])
+}
+
+model product_sizes {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  product_with_sizes product_with_sizes[]
+}
+
+model sub_icon {
+  id       Int        @id @default(autoincrement())
+  name     String
+  products products[]
+}
+
+model sub_brand {
+  id       Int        @id @default(autoincrement())
+  name     String
+  products products[]
+}
+
+model sub_clothes {
+  id       Int        @id @default(autoincrement())
+  name     String
+  products products[]
+}
+
+model sub_accessories {
+  id       Int        @id @default(autoincrement())
+  name     String
+  products products[]
+}
+
+model product_img_urls {
+  id          Int        @id @default(autoincrement())
+  name        String
+  is_main     Boolean    @default(false)
+  style_code  String
+  category_id Int
+  categories  categories @relation(fields: [category_id], references: [id])
+  products    products   @relation(fields: [style_code], references: [style_code])
+}
+
+model snkrs_img_urls {
+  id          Int        @id @default(autoincrement())
+  name        String
+  is_main     Boolean    @default(false)
+  style_code  String
+  category_id Int
+  categories  categories @relation(fields: [category_id], references: [id])
+  snkrs       snkrs      @relation(fields: [style_code], references: [style_code])
+}
