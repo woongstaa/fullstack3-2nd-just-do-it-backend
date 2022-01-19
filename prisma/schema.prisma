@@ -39,7 +39,7 @@ model products {
   product_with_sizes product_with_sizes[]
   carts              carts[]
 
-
+  @@index([style_code], name: "style_code")
 }
 
 model categories {
@@ -101,19 +101,26 @@ model snkrs {
   create_at      DateTime?        @default(now())
   categories     categories       @relation(fields: [category_id], references: [id])
   product_colors product_colors   @relation(fields: [color_id], references: [id])
-  snkrs_data     snkrs_data       @relation(fields: [style_code], references: [style_code])
+  snkrs_data     snkrs_data[]
   snkrs_img_urls snkrs_img_urls[]
+
+
+  @@index([style_code], name: "style_code")
 }
 
 model snkrs_data {
-  id            Int           @id @default(autoincrement())
-  style_code    String
-  user_id       Int
-  size          String
-  create_at     DateTime?     @default(now())
-  snkrs         snkrs[]
+  id         Int       @id @default(autoincrement())
+  style_code String
+  user_id    Int
+  size       String
+  create_at  DateTime? @default(now())
+
+  snkrs         snkrs         @relation(fields: [style_code], references: [style_code])
   users         users         @relation(fields: [user_id], references: [id])
   snkrs_winners snkrs_winners @relation(fields: [id], references: [id])
+
+
+  @@index([style_code], name: "style_code")
 }
 
 model snkrs_winners {
