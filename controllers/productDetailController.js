@@ -1,10 +1,10 @@
-import { productServices } from '../services';
+import { productDetailServices } from '../services';
 
 const productDetail = async (req, res) => {
   try {
     const { style_code } = req.params;
 
-    const data = await productServices.productDetail(style_code);
+    const data = await productDetailServices.productDetail(style_code);
 
     res.status(200).send({ message: '성공', data });
   } catch (err) {
