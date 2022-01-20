@@ -79,7 +79,8 @@ const getSnkrsData = async style_code => {
         product_colors.name as color,
         product_colors.color_hex as hex,
         product_genders.name as gender,
-        price
+        price,
+        is_open
       FROM
         snkrs as s
       JOIN
@@ -107,7 +108,21 @@ const getSnkrsImg = async style_code => {
   `;
 };
 
-const getSnkrs = async style_code => {};
+const getSnkrsSize = async style_code => {
+  return await prisma.$queryRaw`
+    SELECT 
+      product_sizes.name as size,
+      snkrs_with_sizes.quantity
+    FROM
+      snkrs_with_sizes
+    JOIN
+      snkrs ON snkrs.style_code = snkrs_with_sizes.style_code
+    JOIN
+      product_sizes ON product_size_id = product_sizes.id
+    WHERE
+      snkrs_with_sizes.style_code = ${style_code};
+  `;
+};
 
 export default {
   getProductData,
@@ -115,4 +130,5 @@ export default {
   getProductSize,
   getSnkrsData,
   getSnkrsImg,
+  getSnkrsSize,
 };

@@ -89,20 +89,20 @@ model carts {
 }
 
 model snkrs {
-  id             Int              @id @default(autoincrement())
-  style_code     String
-  name           String
-  category_id    Int
-  color_id       Int
-  gender_id      Int
-  price          String
-  is_open        Boolean?         @default(false)
-  create_at      DateTime?        @default(now())
-  categories     categories       @relation(fields: [category_id], references: [id])
-  product_colors product_colors   @relation(fields: [color_id], references: [id])
-  snkrs_data     snkrs_data[]
+  id               Int                @id @default(autoincrement())
+  style_code       String
+  name             String
+  category_id      Int
+  color_id         Int
+  gender_id        Int
+  price            String
+  is_open          Boolean?           @default(false)
+  create_at        DateTime?          @default(now())
+  categories       categories         @relation(fields: [category_id], references: [id])
+  product_colors   product_colors     @relation(fields: [color_id], references: [id])
+  snkrs_data       snkrs_data[]
   snkrs_with_sizes snkrs_with_sizes[]
-  snkrs_img_urls snkrs_img_urls[]
+  snkrs_img_urls   snkrs_img_urls[]
 
 
   @@index([style_code], name: "style_code")
@@ -115,21 +115,18 @@ model snkrs_data {
   size       String
   create_at  DateTime? @default(now())
 
-  snkrs         snkrs         @relation(fields: [style_code], references: [style_code])
-  users         users         @relation(fields: [user_id], references: [id])
-  snkrs_winners snkrs_winners @relation(fields: [id], references: [id])
-
+  snkrs snkrs @relation(fields: [style_code], references: [style_code])
+  users users @relation(fields: [user_id], references: [id])
 
   @@index([style_code], name: "style_code")
 }
 
 model snkrs_winners {
-  id         Int          @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   style_code String
   user_id    Int
   size       String
-  create_at  DateTime?    @default(now())
-  snkrs_data snkrs_data[]
+  create_at  DateTime? @default(now())
 }
 
 model product_colors {
@@ -161,14 +158,14 @@ model snkrs_with_sizes {
   product_size_id Int
   quantity        Int
   product_sizes   product_sizes @relation(fields: [product_size_id], references: [id])
-  snkrs        snkrs      @relation(fields: [style_code], references: [style_code])
+  snkrs           snkrs         @relation(fields: [style_code], references: [style_code])
 }
 
 model product_sizes {
   id                 Int                  @id @default(autoincrement())
   name               String
   product_with_sizes product_with_sizes[]
-  snkrs_with_sizes snkrs_with_sizes[]
+  snkrs_with_sizes   snkrs_with_sizes[]
 }
 
 model sub_icon {

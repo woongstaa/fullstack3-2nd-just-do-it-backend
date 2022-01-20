@@ -2,12 +2,12 @@ import { productDetailDao } from '../models';
 
 const productDetail = async style_code => {
   if (style_code[0] === 'D') {
-    const [snkrsData] = await productDetailDao.getSnrksData(style_code);
-    const productImg = await productDetailDao.getProductImg(style_code);
-    const productSize = await productDetailDao.getProductSize(style_code);
+    const [snkrsData] = await productDetailDao.getSnkrsData(style_code);
+    const snkrsImg = await productDetailDao.getSnkrsImg(style_code);
+    const snkrsSize = await productDetailDao.getSnkrsSize(style_code);
 
-    snkrsData.img = productImg;
-    snkrsData.info = productSize;
+    snkrsData.img = snkrsImg;
+    snkrsData.info = snkrsSize;
 
     return snkrsData;
   } else {

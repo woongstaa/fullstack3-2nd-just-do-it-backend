@@ -2,7 +2,8 @@ import express from 'express';
 import routes from './routes';
 import cors from 'cors';
 import cron from 'node-cron';
-import snkrsDao from './models/snkrsDao';
+import { snkrsDao } from './models';
+import { snkrsServices } from './services';
 
 const app = express();
 const PORT = 8000;
@@ -10,13 +11,14 @@ const PORT = 8000;
 cron.schedule('*/5 * * * * *', function () {
   let bool = false;
   snkrsDao.updataOpenClose(bool, 'DAA-0001');
-  console.log('추첨 불가능상태');
+  snkrsServices.selectWinner('DAA-0001');
+  // console.log('추첨 불가능상태');
 });
 
 cron.schedule('*/10 * * * * *', function () {
   let bool = true;
   snkrsDao.updataOpenClose(bool, 'DAA-0001');
-  console.log('추첨 가능');
+  // console.log('추첨 가능');
 });
 
 app.use(cors());
