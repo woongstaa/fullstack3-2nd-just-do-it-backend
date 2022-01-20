@@ -94,10 +94,9 @@ model snkrs {
   name           String
   category_id    Int
   color_id       Int
-  size_id        Int
   gender_id      Int
   price          String
-  quantity       Int
+  is_open        Boolean?         @default(false)
   create_at      DateTime?        @default(now())
   categories     categories       @relation(fields: [category_id], references: [id])
   product_colors product_colors   @relation(fields: [color_id], references: [id])
