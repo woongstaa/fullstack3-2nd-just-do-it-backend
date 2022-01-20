@@ -259,4 +259,4 @@ VALUES
   ("/Images/Kids/Clothes/저지/3/1.png",1,"BCD-0003",2),
   ("/Images/Kids/Clothes/저지/3/2.png",0,"BCD-0003",2),
   ("/Images/Kids/Clothes/저지/3/3.png",0,"BCD-0003",2),
-  ("/Images/Kids/Clothes/저지/3/4.png",0,"BCD-0003",2), 
+  ("/Images/Kids/Clothes/저지/3/4.png",0,"BCD-0003",2);
