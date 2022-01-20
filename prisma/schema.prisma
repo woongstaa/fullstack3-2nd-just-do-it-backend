@@ -15,10 +15,10 @@ model products {
   style_code         String
   name               String
   category_id        Int
-  color_id           Int
+  color_id           Int?
   gender_id          Int
   normal_price       String
-  sale_rate          Float?
+  sale_rate          Int?
   sale_price         String?
   create_at          DateTime? @default(now())
   is_member          Boolean   @default(false)
@@ -28,7 +28,7 @@ model products {
   sub_accessories_id Int?
 
   categories         categories           @relation(fields: [category_id], references: [id])
-  product_colors     product_colors       @relation(fields: [color_id], references: [id])
+  product_colors     product_colors?      @relation(fields: [color_id], references: [id])
   product_genders    product_genders      @relation(fields: [gender_id], references: [id])
   sub_icon           sub_icon?            @relation(fields: [sub_icon_id], references: [id])
   sub_brand          sub_brand?           @relation(fields: [sub_brand_id], references: [id])

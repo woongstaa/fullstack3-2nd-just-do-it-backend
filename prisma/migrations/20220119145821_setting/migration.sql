@@ -4,10 +4,10 @@ CREATE TABLE `products` (
     `style_code` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `category_id` INTEGER NOT NULL,
-    `color_id` INTEGER NOT NULL,
+    `color_id` INTEGER NULL,
     `gender_id` INTEGER NOT NULL,
     `normal_price` VARCHAR(191) NOT NULL,
-    `sale_rate` DOUBLE NULL,
+    `sale_rate` INTEGER NULL,
     `sale_price` VARCHAR(191) NULL,
     `create_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
     `is_member` BOOLEAN NOT NULL DEFAULT false,
@@ -200,7 +200,7 @@ CREATE TABLE `snkrs_img_urls` (
 ALTER TABLE `products` ADD CONSTRAINT `products_category_id_fkey` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `products` ADD CONSTRAINT `products_color_id_fkey` FOREIGN KEY (`color_id`) REFERENCES `product_colors`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `products` ADD CONSTRAINT `products_color_id_fkey` FOREIGN KEY (`color_id`) REFERENCES `product_colors`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `products` ADD CONSTRAINT `products_gender_id_fkey` FOREIGN KEY (`gender_id`) REFERENCES `product_genders`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
