@@ -101,6 +101,7 @@ model snkrs {
   categories     categories       @relation(fields: [category_id], references: [id])
   product_colors product_colors   @relation(fields: [color_id], references: [id])
   snkrs_data     snkrs_data[]
+  snkrs_with_sizes snkrs_with_sizes[]
   snkrs_img_urls snkrs_img_urls[]
 
 
@@ -154,10 +155,20 @@ model product_with_sizes {
   products        products      @relation(fields: [style_code], references: [style_code])
 }
 
+model snkrs_with_sizes {
+  id              Int           @id @default(autoincrement())
+  style_code      String
+  product_size_id Int
+  quantity        Int
+  product_sizes   product_sizes @relation(fields: [product_size_id], references: [id])
+  snkrs        snkrs      @relation(fields: [style_code], references: [style_code])
+}
+
 model product_sizes {
   id                 Int                  @id @default(autoincrement())
   name               String
   product_with_sizes product_with_sizes[]
+  snkrs_with_sizes snkrs_with_sizes[]
 }
 
 model sub_icon {
