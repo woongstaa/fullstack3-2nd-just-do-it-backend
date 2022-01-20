@@ -1,5 +1,5 @@
 INSERT INTO 
-  SNKRS
+  snkrs
   (style_code,name,category_id,color_id,gender_id,price)
 VALUES
   ("DAA-0001", "나이키 에어 디올 로우", 4,14,1,"2700000"),

@@ -1,3 +1,26 @@
+insert into categories (name) values ("shoes"),("clothes"),("accssories"),("snkrs");
+
+insert into product_genders (name) values ("남성"),("여성"),("어린이");
+
+insert into product_colors (name, color_hex) values
+("연갈색","#F0E68C"),("검정색","#000000"),("파랑색","#3786D5"),
+("갈색","#765439") ,("금색","#D5D606"),("회색","#737373"),
+("녹색","#109300"),("쑥색","#7E7F01"),("남색","#3A4A75"),
+("주황색", "#EB621D") , ("분홍색", "#EB008A"), ("보라색", "#693BB1"),
+("빨강색", "#C50101"), ("은색", "#C4C4C4"), ("흰색", "#FFFFFF"),
+("노란색", "#FCC200");
+
+insert into product_sizes (name) values
+("220"),("230"),("240"),("250"),("260"),("270"),("280"),("290"),("300"),("65(S)"),("70(M)"),("75(L)"),("80(XL)"),("80(S)"),("85(M)"),("90(L)"),("95(XL)"),("95(M)"),("100(L)"),("105(XL)"),("110(2XL)"),("FREE");
+
+insert into sub_icon (name) values ("에어 포스 1"), ("나이키 에어맥스"),("데이브레이크"),("인피니티 런"),("블레이저"),("나이키 와플"),("나이키 크레이터 임팩트");
+
+insert into sub_brand (name) values ("ACG"), ("Nike Lab"), ("나이키 스포츠웨어"), ("조던");
+
+insert into sub_clothes (name) values ("베이스레이어 상의"),("베이스레이어 하의") , ("그래픽티"), ("저지"), ("조거"), ("브라");
+
+insert into sub_accessories (name) values ("모자"),("가방"),("장갑");
+
 insert into 
 products
 (style_code, name, category_id, gender_id,color_id,  normal_price, sale_rate, sale_price, is_member, sub_brand_id, sub_icon_id )
@@ -92,8 +115,119 @@ values
 ("ACE-0002","나이키 크레이터 임팩트",1,3,7,"99000",30,"69300",FALSE,4,5),
 ("ACE-0003","나이키 크레이터 임팩트",1,3,12,"99000",30,"69300",false,3,5);
 
+INSERT INTO 
+  products 
+  (style_code,name,category_id,color_id,gender_id,normal_price,sale_rate,sale_price,is_member,sub_brand_id,sub_clothes_id)
+VALUES
+  ("BAA-0001", "나이키 리펠 베이퍼", 2,2,1,"135000",NULL,NULL,FALSE,2,3),
+  ("BAA-0002", "나이키 ACG 긴팔 티셔츠", 2,8,1,"49000",NULL,NULL,TRUE,2,3),
+  ("BAA-0003", "나이키 ACG Iceland", 2,2,1,"49000",NULL,NULL,FALSE,1,3),
+  ("BAA-0004", "나이키 ACG Glacier", 2,2,1,"49000",NULL,NULL,FALSE,1,3),
+  ("BAA-0005", "나이키 ACG Trolls", 2,10,1,"135000",NULL,NULL,FALSE,2,3),
 
-insert into
+  ("BAB-0001", "나이키 프로 드라이 핏 긴팔 탑 AS", 2,15,1,"45000",NULL,NULL,TRUE,3,1),
+  ("BAB-0002", "나이키 프로 드라이 핏 모크넥 긴팔 AS", 2,2,1,"45000",NULL,NULL,FALSE,3,1),
+  ("BAB-0003", "나이키 프로 웜 남성 긴팔 탑 AS", 2,2,1,"45000",NULL,NULL,FALSE,3,1),
+  ("BAB-0004", "나이키 프로 드라이 핏 타이트 긴팔 탑 AS", 2,2,1,"45000",10,"40500",FALSE,3,1),
+  ("BAB-0005", "나이키 프로 드라이 핏 타이트 반팔 탑 AS", 2,15,1,"39000",10,"35100",FALSE,3,1),
+  ("BAB-0006", "나이키 프로 드라이 핏 타이트 반팔 탑 AS", 2,2,1,"31500",NULL,NULL,TRUE,3,1),
+  ("BAB-0007", "나이키 프로 드라이 핏 긴팔 탑 AS", 2,2,1,"35500",NULL,NULL,TRUE,3,1),
+
+  ("BAC-0001", "나이키 프로 드라이 핏 남성 쇼츠 AS", 2,2,1,"45000",NULL,NULL,FALSE,4,2),
+  ("BAC-0002", "나이키 프로 드라이 핏 3/4 타이츠 AS", 2,2,1,"49000",NULL,NULL,TRUE,4,2),
+  ("BAC-0003", "나이키 요가 드라이 핏 인피날론 쇼츠 AS", 2,2,1,"69000",35,"44900",FALSE,3,2),
+
+
+  ("BAD-0001", "리버풀 FC 2021/22 스타디움 써드", 2,16,1,"83300",NULL,NULL,FALSE,3,4),
+  ("BAD-0002", "인터밀란 2021/22 스타디움 써드", 2,2,1,"83300",NULL,NULL,FALSE,3,4),
+  ("BAD-0003", "파리 생제르맹 2021/22 스타디움 써드", 2,15,1,"83300",NULL,NULL,TRUE,4,4),
+  ("BAD-0004", "FC 바르셀로나 2021/22 스타디움 써드", 2,3,1,"83300",NULL,NULL,FALSE,3,4),
+  ("BAD-0005", "첼시 FC 2021/22 스타디움 써드", 2,7,1,"83300",NULL,NULL,FALSE,3,4),
+
+
+  ("BAE-0001", "나이키 스포츠웨어 남성 플리스 조거 팬츠 AS", 2,2,1,"85000",NULL,NULL,TRUE,3,5),
+  ("BAE-0002", "나이키 스포츠웨어 에센셜 플리스 조거 팬츠 AS", 2,2,1,"75000",NULL,NULL,FALSE,3,5),
+  ("BAE-0003", "나이키 스포츠웨어 Arch 플리스 테리 조거 팬츠 AS", 2,1,1,"85000",NULL,NULL,FALSE,3,5),
+  ("BAE-0004", "나이키 테이퍼드 트레이닝 팬츠 AS", 2,6,1,"65000",NULL,NULL,FALSE,2,5),
+  ("BAE-0005", "나이키 스포츠웨어 테크 에센셜 트리뷰트 팬츠", 2,9,1,"89000",NULL,NULL,TRUE,4,5),
+
+
+
+  ("BBA-0001", "나이키 ACG 드라이 핏 ADV", 2,6,2,"99000",NULL,NULL,TRUE,1,3),
+  ("BBA-0002", "나이키 ACG 반팔 티셔츠", 2,7,2,"49000",NULL,NULL,FALSE,1,3),
+  ("BBA-0003", "나이키 ACG 반팔 티셔츠", 2,13,2,"49000",NULL,NULL,FALSE,1,3),
+  ("BBA-0004", "나이키 요가 럭스 골지 커버업 긴팔 탑 AS", 2,14,2,"99000",NULL,NULL,FALSE,2,3),
+  ("BBA-0005", "NikeLab 솔로 스우시 반팔 티셔츠", 2,2,2,"45000",NULL,NULL,FALSE,2,3),
+  ("BBA-0006", "NikeLab 솔로 스우시 반팔 티셔츠", 2,15,2,"45000",NULL,NULL,FALSE,2,3),
+
+  ("BBB-0001", "나이키 스우시 퓨추라 브라 AS", 2,6,2,"39000",45,"21500",FALSE,3,1),
+
+  ("BBC-0001", "나이키 프로 365 5인치 쇼츠 AS", 2,2,2,"45000",10,"40500",TRUE,3,2),
+
+  ("BBD-0001", "나이키 스포츠웨어 여성 골지 긴팔 저지 AS", 2,1,2,"75000",NULL,NULL,FALSE,3,4),
+  ("BBD-0002", "나이키 스포츠웨어 여성 골지 긴팔 저지 AS", 2,2,2,"75000",NULL,NULL,FALSE,3,4),
+
+  ("BBE-0001", "나이키 요가 드라이 핏 7/8 플리스 조거 팬츠", 2,2,2,"79000",NULL,NULL,TRUE,2,5),
+  ("BBE-0002", "나이키 스포츠웨어 리펠 에센셜", 2,2,2,"109000",NULL,NULL,FALSE,3,5),
+  ("BBE-0003", "나이키 요가 드라이 핏 7/8 플리스 조거 팬츠", 2,6,2,"79000",NULL,NULL,FALSE,2,5),
+  ("BBE-0004", "나이키 스포츠웨어 스우시 하이라이즈 조거 팬츠", 2,5,2,"85000",NULL,NULL,FALSE,3,5),
+
+  ("BCA-0001", "나이키 x 스페이스 잼 : 새로운 시대", 2,15,3,"39000",NULL,NULL,TRUE,4,3),
+  ("BCA-0002", "나이키 x 스페이스 잼 : 새로운 시대", 2,2,3,"39000",NULL,NULL,FALSE,4,3),
+  ("BCA-0003", "나이키 x 스페이스 잼 : 새로운 시대", 2,3,3,"39000",NULL,NULL,FALSE,4,3),
+  ("BCA-0004", "나이키 스포츠웨어 클럽 플리스 LBR", 2,11,3,"49000",NULL,NULL,FALSE,3,3),
+
+  ("BCB-0001", "나이키 프로 드라이 핏 주니어 긴팔 탑", 2,2,3,"49000",10,"44100",FALSE,3,1),
+  
+  ("BCC-0001", "나이키 드라이 핏 x 스페이스 잼 : 새로운 시대", 2,12,3,"85000",NULL,NULL,FALSE,4,2),
+  
+  ("BCD-0001", "나이키 x 스페이스 잼 : 새로운 시대 저지", 2,3,3,"85000",NULL,NULL,TRUE,3,4),
+  ("BCD-0002", "토트넘 홋스퍼 2021/22 스타디움 홈 저지", 2,15,3,"109000",NULL,NULL,FALSE,3,4),
+  ("BCD-0003", "FC 바르셀로나 2021/22 스타디움 홈 저지", 2,12,3,"109000",NULL,NULL,FALSE,3,4); 
+
+  insert into 
+products
+(style_code, name, category_id, gender_id, normal_price, sale_rate, sale_price, is_member, sub_accessories_id )
+values
+("CAA-0001","나이키 헤이워드 2.0",3,1,"75000",NULL,NULL,FALSE,2),
+("CAA-0002","나이키 유틸리티 스피드",3,1,"89000",NULL,NULL,TRUE,2),
+("CAA-0003","나이키 SB 코트하우스",3,1,"65000",NULL,NULL,FALSE,2),
+("CAB-0001","조던 프로 잉곳",3,1,"39000",NULL,NULL,FALSE,1),
+("CAB-0002","나이키 ACG 웜",3,1,"59000",NULL,NULL,FALSE,1),
+("CAB-0003","나이키 ACG",3,1,"45000",NULL,NULL,FALSE,1),
+("CAC-0001","나이키 골키퍼 매치",3,1,"39000",25,"29300",TRUE,3),
+("CAC-0002","나이키 콜드 웨더",3,1,"39000",20,"31200",TRUE,3),
+("CAC-0003","나이키 듀라필 4",3,1,"19000",20,"15200",FALSE,3),
+
+("CBA-0001","나이키 헤리티지",3,2,"29000",NULL,NULL,TRUE,2),
+("CBA-0002","나이키 헤리티지 힙색",3,2,"29000",30,"20300",FALSE,2),
+("CBA-0003","나이키 원 럭스",3,2,"169000",10,"152100",FALSE,2),
+("CBB-0001","나이키 스포츠웨어 헤리티지86 퓨추라",3,2,"29000",NULL,NULL,FALSE,1),
+("CBB-0002","나이키 스포츠웨어 헤리티지 캡",3,2,"29000",NULL,NULL,FALSE,1),
+("CBB-0003","나이키 스포츠웨어 워싱 캡",3,2,"31000",NULL,NULL,TRUE,1),
+("CBC-0001","나이키 골키퍼 매치",3,2,"39000",30,"27300",FALSE,3),
+("CBC-0002","나이키 투어 클래식 3",3,2,"35000",20,"28000",TRUE,3),
+("CBC-0003","나이키 TC3",3,2,"35000",20,"28000",FALSE,3),
+
+("CCA-0001","나이키 엘리멘탈",3,3,"39000",NULL,NULL,TRUE,2),
+("CCA-0002","나이키 엘리멘탈 V",3,3,"42000",NULL,NULL,TRUE,2),
+("CCA-0003","나이키 탄준",3,3,"39000",10,"35100",FALSE,2),
+("CCB-0001","나이키 윈터라이즈드",3,3,"31000",NULL,NULL,FALSE,1),
+("CCB-0002","나이키 비니",3,3,"24000",NULL,NULL,FALSE,1),
+("CCB-0003","나이키 헤리티지86 퓨추라",3,3,"29000",NULL,NULL,FALSE,1),
+("CCC-0001","나이키 주니어 골키퍼 매치",3,3,"29000",25,"21800",FALSE,3),
+("CCC-0002","조던 점프맨 패치",3,3,"45000",20,"36000",FALSE,3);
+
+INSERT INTO 
+  snkrs
+  (style_code,name,category_id,color_id,gender_id,price)
+VALUES
+  ("DAA-0001", "나이키 에어 디올 로우", 4,14,1,"2700000"),
+  ("DAA-0002", "나이키 에어 디올 하이", 4,14,1,"3000000"),
+  ("DAA-0003", "조던1 x 트래비스 스캇 x 프라그먼트 OG 하이", 4,15,1,"189000"),
+  ("DAA-0004", "조던1 x 오프화이트 레트로 하이 시카고", 4,15,1,"239000");
+
+  insert into
 product_with_sizes
 (style_code,product_size_id,quantity)
 values
@@ -728,6 +862,232 @@ values
 ("ACE-0003",3,80),
 ("ACE-0003",4,80);
 
+INSERT INTO 
+  product_with_sizes
+  (style_code, product_size_id, quantity)
+VALUES
+("BAA-0001",18,80),
+("BAA-0001",19,80),
+("BAA-0001",20,80),
+("BAA-0001",21,80),
+("BAA-0002",18,80),
+("BAA-0002",19,80),
+("BAA-0002",20,80),
+("BAA-0002",21,80),
+("BAA-0003",18,80),
+("BAA-0003",19,80),
+("BAA-0003",20,80),
+("BAA-0003",21,80),
+("BAA-0004",18,80),
+("BAA-0004",19,80),
+("BAA-0004",20,80),
+("BAA-0004",21,80),
+("BAA-0005",18,80),
+("BAA-0005",19,80),
+("BAA-0005",20,80),
+("BAA-0005",21,80),
+
+("BAB-0001",18,80),
+("BAB-0001",19,80),
+("BAB-0001",20,80),
+("BAB-0001",21,80),
+("BAB-0002",18,80),
+("BAB-0002",19,80),
+("BAB-0002",20,80),
+("BAB-0002",21,80),
+("BAB-0003",18,80),
+("BAB-0003",19,80),
+("BAB-0003",20,80),
+("BAB-0003",21,80),
+("BAB-0004",18,80),
+("BAB-0004",19,80),
+("BAB-0004",20,80),
+("BAB-0004",21,80),
+("BAB-0005",18,80),
+("BAB-0005",19,80),
+("BAB-0005",20,80),
+("BAB-0005",21,80),
+("BAB-0006",18,80),
+("BAB-0006",19,80),
+("BAB-0006",20,80),
+("BAB-0006",21,80),
+("BAB-0007",18,80),
+("BAB-0007",19,80),
+("BAB-0007",20,80),
+("BAB-0007",21,80),
+
+("BAC-0001",14,80),
+("BAC-0001",15,80),
+("BAC-0001",16,80),
+("BAC-0001",17,80),
+("BAC-0002",14,80),
+("BAC-0002",15,80),
+("BAC-0002",16,80),
+("BAC-0002",17,80),
+("BAC-0003",14,80),
+("BAC-0003",15,80),
+("BAC-0003",16,80),
+("BAC-0003",17,80),
+
+("BAD-0001",18,80),
+("BAD-0001",19,80),
+("BAD-0001",20,80),
+("BAD-0001",21,80),
+("BAD-0002",18,80),
+("BAD-0002",19,80),
+("BAD-0002",20,80),
+("BAD-0002",21,80),
+("BAD-0003",18,80),
+("BAD-0003",19,80),
+("BAD-0003",20,80),
+("BAD-0003",21,80),
+("BAD-0004",18,80),
+("BAD-0004",19,80),
+("BAD-0004",20,80),
+("BAD-0004",21,80),
+("BAD-0005",18,80),
+("BAD-0005",19,80),
+("BAD-0005",20,80),
+("BAD-0005",21,80),
+
+("BAE-0001",14,80),
+("BAE-0001",15,80),
+("BAE-0001",16,80),
+("BAE-0001",17,80),
+("BAE-0002",14,80),
+("BAE-0002",15,80),
+("BAE-0002",16,80),
+("BAE-0002",17,80),
+("BAE-0003",14,80),
+("BAE-0003",15,80),
+("BAE-0003",16,80),
+("BAE-0003",17,80),
+("BAE-0004",14,80),
+("BAE-0004",15,80),
+("BAE-0004",16,80),
+("BAE-0004",17,80),
+("BAE-0005",14,80),
+("BAE-0005",15,80),
+("BAE-0005",16,80),
+("BAE-0005",17,80),
+
+("BBA-0001",10,80),
+("BBA-0001",11,80),
+("BBA-0001",12,80),
+("BBA-0001",13,80),
+("BBA-0002",10,80),
+("BBA-0002",11,80),
+("BBA-0002",12,80),
+("BBA-0002",13,80),
+("BBA-0003",10,80),
+("BBA-0003",11,80),
+("BBA-0003",12,80),
+("BBA-0003",13,80),
+("BBA-0004",10,80),
+("BBA-0004",11,80),
+("BBA-0004",12,80),
+("BBA-0004",13,80),
+("BBA-0005",10,80),
+("BBA-0005",11,80),
+("BBA-0005",12,80),
+("BBA-0005",13,80),
+("BBA-0006",10,80),
+("BBA-0006",11,80),
+("BBA-0006",12,80),
+("BBA-0006",13,80),
+
+("BBB-0001",10,80),
+("BBB-0001",11,80),
+("BBB-0001",12,80),
+("BBB-0001",13,80),
+
+("BBC-0001",10,80),
+("BBC-0001",11,80),
+("BBC-0001",12,80),
+("BBC-0001",13,80),
+
+("BBD-0001",10,80),
+("BBD-0001",11,80),
+("BBD-0001",12,80),
+("BBD-0001",13,80),
+("BBD-0002",10,80),
+("BBD-0002",11,80),
+("BBD-0002",12,80),
+("BBD-0002",13,80),
+
+("BBE-0001",10,80),
+("BBE-0001",11,80),
+("BBE-0001",12,80),
+("BBE-0001",13,80),
+("BBE-0002",10,80),
+("BBE-0002",11,80),
+("BBE-0002",12,80),
+("BBE-0002",13,80),
+("BBE-0003",10,80),
+("BBE-0003",11,80),
+("BBE-0003",12,80),
+("BBE-0003",13,80),
+("BBE-0004",10,80),
+("BBE-0004",11,80),
+("BBE-0004",12,80),
+("BBE-0004",13,80),
+
+("BCA-0001",10,80),
+("BCA-0001",11,80),
+("BCA-0001",12,80),
+("BCA-0001",13,80),
+("BCA-0002",10,80),
+("BCA-0002",11,80),
+("BCA-0002",12,80),
+("BCA-0002",13,80),
+("BCA-0003",10,80),
+("BCA-0003",11,80),
+("BCA-0003",12,80),
+("BCA-0003",13,80),
+("BCA-0004",10,80),
+("BCA-0004",11,80),
+("BCA-0004",12,80),
+("BCA-0004",13,80),
+
+("BCB-0001",10,80),
+("BCB-0001",11,80),
+("BCB-0001",12,80),
+("BCB-0001",13,80),
+
+("BCC-0001",10,80),
+("BCC-0001",11,80),
+("BCC-0001",12,80),
+("BCC-0001",13,80),
+
+("BCD-0001",10,80),
+("BCD-0001",11,80),
+("BCD-0001",12,80),
+("BCD-0001",13,80),
+("BCD-0002",10,80),
+("BCD-0002",11,80),
+("BCD-0002",12,80),
+("BCD-0002",13,80),
+("BCD-0003",10,80),
+("BCD-0003",11,80),
+("BCD-0003",12,80),
+("BCD-0003",13,80);
+
+insert into
+product_with_sizes
+(style_code,product_size_id,quantity)
+values
+("CAA-0001",22,50), ("CAA-0002",22,50), ("CAA-0003",22,50),
+("CAB-0001",22,50), ("CAB-0002",22,50), ("CAB-0003",22,50),
+("CAC-0001",22,50), ("CAC-0002",22,50), ("CAC-0003",22,50),
+
+("CBA-0001",22,50), ("CBA-0002",22,50), ("CBA-0003",22,50),
+("CBB-0001",22,50), ("CBB-0002",22,50), ("CBB-0003",22,50),
+("CBC-0001",22,50), ("CBC-0002",22,50), ("CBC-0003",22,50),
+
+("CCA-0001",22,50), ("CCA-0002",22,50), ("CCA-0003",22,50),
+("CCB-0001",22,50), ("CCB-0002",22,50), ("CCB-0003",22,50),
+("CCC-0001",22,50), ("CCC-0002",22,50);
+
 insert into
 product_img_urls
 (name, is_main, style_code, category_id)
@@ -1094,3 +1454,351 @@ values
 ("/Images/Kids/Shoes/Craterimpact/3/3-2.png",0,"ACE-0003",1),
 ("/Images/Kids/Shoes/Craterimpact/3/3-3.png",0,"ACE-0003",1),
 ("/Images/Kids/Shoes/Craterimpact/3/3-4.png",0,"ACE-0003",1);
+
+INSERT INTO 
+  product_img_urls (name,is_main,style_code,category_id)
+VALUES
+  ("/Images/Men/Clothes/그래픽티/1/1.png",1,"BAA-0001",2),
+  ("/Images/Men/Clothes/그래픽티/1/2.png",0,"BAA-0001",2),
+  ("/Images/Men/Clothes/그래픽티/1/3.png",0,"BAA-0001",2),
+  ("/Images/Men/Clothes/그래픽티/1/4.png",0,"BAA-0001",2),
+
+  ("/Images/Men/Clothes/그래픽티/2/1.png",1,"BAA-0002",2),
+  ("/Images/Men/Clothes/그래픽티/2/2.png",0,"BAA-0002",2),
+  ("/Images/Men/Clothes/그래픽티/2/3.png",0,"BAA-0002",2),
+  ("/Images/Men/Clothes/그래픽티/2/4.png",0,"BAA-0002",2),
+
+  ("/Images/Men/Clothes/그래픽티/3/1.png",1,"BAA-0003",2),
+  ("/Images/Men/Clothes/그래픽티/3/2.png",0,"BAA-0003",2),
+  ("/Images/Men/Clothes/그래픽티/3/3.png",0,"BAA-0003",2),
+  ("/Images/Men/Clothes/그래픽티/3/4.png",0,"BAA-0003",2),
+  
+  ("/Images/Men/Clothes/그래픽티/4/1.png",1,"BAA-0004",2),
+  ("/Images/Men/Clothes/그래픽티/4/2.png",0,"BAA-0004",2),
+  ("/Images/Men/Clothes/그래픽티/4/3.png",0,"BAA-0004",2),
+  ("/Images/Men/Clothes/그래픽티/4/4.png",0,"BAA-0004",2),
+
+  ("/Images/Men/Clothes/그래픽티/5/1.png",1,"BAA-0005",2),
+  ("/Images/Men/Clothes/그래픽티/5/2.png",0,"BAA-0005",2),
+  ("/Images/Men/Clothes/그래픽티/5/3.png",0,"BAA-0005",2),
+  ("/Images/Men/Clothes/그래픽티/5/4.png",0,"BAA-0005",2),
+
+
+  ("/Images/Men/Clothes/베이스레이어상의/1/1.png",1,"BAB-0001",2),
+  ("/Images/Men/Clothes/베이스레이어상의/1/2.png",0,"BAB-0001",2),
+  ("/Images/Men/Clothes/베이스레이어상의/1/3.png",0,"BAB-0001",2),
+  ("/Images/Men/Clothes/베이스레이어상의/1/4.png",0,"BAB-0001",2),
+
+  ("/Images/Men/Clothes/베이스레이어상의/2/1.png",1,"BAB-0002",2),
+  ("/Images/Men/Clothes/베이스레이어상의/2/2.png",0,"BAB-0002",2),
+  ("/Images/Men/Clothes/베이스레이어상의/2/3.png",0,"BAB-0002",2),
+  ("/Images/Men/Clothes/베이스레이어상의/2/4.png",0,"BAB-0002",2),
+
+  ("/Images/Men/Clothes/베이스레이어상의/3/1.png",1,"BAB-0003",2),
+  ("/Images/Men/Clothes/베이스레이어상의/3/2.png",0,"BAB-0003",2),
+  ("/Images/Men/Clothes/베이스레이어상의/3/3.png",0,"BAB-0003",2),
+  ("/Images/Men/Clothes/베이스레이어상의/3/4.png",0,"BAB-0003",2),
+
+  ("/Images/Men/Clothes/베이스레이어상의/4/1.png",1,"BAB-0004",2),
+  ("/Images/Men/Clothes/베이스레이어상의/4/2.png",0,"BAB-0004",2),
+  ("/Images/Men/Clothes/베이스레이어상의/4/3.png",0,"BAB-0004",2),
+  ("/Images/Men/Clothes/베이스레이어상의/4/4.png",0,"BAB-0004",2),
+
+  ("/Images/Men/Clothes/베이스레이어상의/5/1.png",1,"BAB-0005",2),
+  ("/Images/Men/Clothes/베이스레이어상의/5/2.png",0,"BAB-0005",2),
+  ("/Images/Men/Clothes/베이스레이어상의/5/3.png",0,"BAB-0005",2),
+  ("/Images/Men/Clothes/베이스레이어상의/5/4.png",0,"BAB-0005",2),
+
+  ("/Images/Men/Clothes/베이스레이어상의/6/1.png",1,"BAB-0006",2),
+  ("/Images/Men/Clothes/베이스레이어상의/6/2.png",0,"BAB-0006",2),
+  ("/Images/Men/Clothes/베이스레이어상의/6/3.png",0,"BAB-0006",2),
+  ("/Images/Men/Clothes/베이스레이어상의/6/4.png",0,"BAB-0006",2),
+
+  ("/Images/Men/Clothes/베이스레이어상의/7/1.png",1,"BAB-0007",2),
+  ("/Images/Men/Clothes/베이스레이어상의/7/2.png",0,"BAB-0007",2),
+  ("/Images/Men/Clothes/베이스레이어상의/7/3.png",0,"BAB-0007",2),
+  ("/Images/Men/Clothes/베이스레이어상의/7/4.png",0,"BAB-0007",2),
+
+
+  ("/Images/Men/Clothes/베이스레이어하의/1/1.png",1,"BAC-0001",2),
+  ("/Images/Men/Clothes/베이스레이어하의/1/2.png",0,"BAC-0001",2),
+  ("/Images/Men/Clothes/베이스레이어하의/1/3.png",0,"BAC-0001",2),
+  ("/Images/Men/Clothes/베이스레이어하의/1/4.png",0,"BAC-0001",2),
+
+  ("/Images/Men/Clothes/베이스레이어하의/2/1.png",1,"BAC-0002",2),
+  ("/Images/Men/Clothes/베이스레이어하의/2/2.png",0,"BAC-0002",2),
+  ("/Images/Men/Clothes/베이스레이어하의/2/3.png",0,"BAC-0002",2),
+  ("/Images/Men/Clothes/베이스레이어하의/2/4.png",0,"BAC-0002",2),
+
+  ("/Images/Men/Clothes/베이스레이어하의/3/1.png",1,"BAC-0003",2),
+  ("/Images/Men/Clothes/베이스레이어하의/3/2.png",0,"BAC-0003",2),
+  ("/Images/Men/Clothes/베이스레이어하의/3/3.png",0,"BAC-0003",2),
+  ("/Images/Men/Clothes/베이스레이어하의/3/4.png",0,"BAC-0003",2),
+  
+
+  ("/Images/Men/Clothes/저지/1/1.png",1,"BAD-0001",2),
+  ("/Images/Men/Clothes/저지/1/2.png",0,"BAD-0001",2),
+  ("/Images/Men/Clothes/저지/1/3.png",0,"BAD-0001",2),
+  ("/Images/Men/Clothes/저지/1/4.png",0,"BAD-0001",2),
+
+  ("/Images/Men/Clothes/저지/2/1.png",1,"BAD-0002",2),
+  ("/Images/Men/Clothes/저지/2/2.png",0,"BAD-0002",2),
+  ("/Images/Men/Clothes/저지/2/3.png",0,"BAD-0002",2),
+  ("/Images/Men/Clothes/저지/2/4.png",0,"BAD-0002",2),
+
+  ("/Images/Men/Clothes/저지/3/1.png",1,"BAD-0003",2),
+  ("/Images/Men/Clothes/저지/3/2.png",0,"BAD-0003",2),
+  ("/Images/Men/Clothes/저지/3/3.png",0,"BAD-0003",2),
+  ("/Images/Men/Clothes/저지/3/4.png",0,"BAD-0003",2),
+
+  ("/Images/Men/Clothes/저지/4/1.png",1,"BAD-0004",2),
+  ("/Images/Men/Clothes/저지/4/2.png",0,"BAD-0004",2),
+  ("/Images/Men/Clothes/저지/4/3.png",0,"BAD-0004",2),
+  ("/Images/Men/Clothes/저지/4/4.png",0,"BAD-0004",2),
+
+  ("/Images/Men/Clothes/저지/5/1.png",1,"BAD-0005",2),
+  ("/Images/Men/Clothes/저지/5/2.png",0,"BAD-0005",2),
+  ("/Images/Men/Clothes/저지/5/3.png",0,"BAD-0005",2),
+  ("/Images/Men/Clothes/저지/5/4.png",0,"BAD-0005",2),
+
+  
+  ("/Images/Men/Clothes/조거/1/1.png",1,"BAE-0001",2),
+  ("/Images/Men/Clothes/조거/1/2.png",0,"BAE-0001",2),
+  ("/Images/Men/Clothes/조거/1/3.png",0,"BAE-0001",2),
+  ("/Images/Men/Clothes/조거/1/4.png",0,"BAE-0001",2),
+
+  ("/Images/Men/Clothes/조거/2/1.png",1,"BAE-0002",2),
+  ("/Images/Men/Clothes/조거/2/2.png",0,"BAE-0002",2),
+  ("/Images/Men/Clothes/조거/2/3.png",0,"BAE-0002",2),
+  ("/Images/Men/Clothes/조거/2/4.png",0,"BAE-0002",2),
+
+  ("/Images/Men/Clothes/조거/3/1.png",1,"BAE-0003",2),
+  ("/Images/Men/Clothes/조거/3/2.png",0,"BAE-0003",2),
+  ("/Images/Men/Clothes/조거/3/3.png",0,"BAE-0003",2),
+  ("/Images/Men/Clothes/조거/3/4.png",0,"BAE-0003",2),
+
+  ("/Images/Men/Clothes/조거/4/1.png",1,"BAE-0004",2),
+  ("/Images/Men/Clothes/조거/4/2.png",0,"BAE-0004",2),
+  ("/Images/Men/Clothes/조거/4/3.png",0,"BAE-0004",2),
+  ("/Images/Men/Clothes/조거/4/4.png",0,"BAE-0004",2),
+
+  ("/Images/Men/Clothes/조거/5/1.png",1,"BAE-0005",2),
+  ("/Images/Men/Clothes/조거/5/2.png",0,"BAE-0005",2),
+  ("/Images/Men/Clothes/조거/5/3.png",0,"BAE-0005",2),
+  ("/Images/Men/Clothes/조거/5/4.png",0,"BAE-0005",2),
+
+
+
+
+
+  ("/Images/Women/Clothes/그래픽티/1/1.png",1,"BBA-0001",2),
+  ("/Images/Women/Clothes/그래픽티/1/2.png",0,"BBA-0001",2),
+  ("/Images/Women/Clothes/그래픽티/1/3.png",0,"BBA-0001",2),
+  ("/Images/Women/Clothes/그래픽티/1/4.png",0,"BBA-0001",2),
+
+  ("/Images/Women/Clothes/그래픽티/2/1.png",1,"BBA-0002",2),
+  ("/Images/Women/Clothes/그래픽티/2/2.png",0,"BBA-0002",2),
+  ("/Images/Women/Clothes/그래픽티/2/3.png",0,"BBA-0002",2),
+  ("/Images/Women/Clothes/그래픽티/2/4.png",0,"BBA-0002",2),
+
+  ("/Images/Women/Clothes/그래픽티/3/1.png",1,"BBA-0003",2),
+  ("/Images/Women/Clothes/그래픽티/3/2.png",0,"BBA-0003",2),
+  ("/Images/Women/Clothes/그래픽티/3/3.png",0,"BBA-0003",2),
+  ("/Images/Women/Clothes/그래픽티/3/4.png",0,"BBA-0003",2),
+
+  ("/Images/Women/Clothes/그래픽티/4/1.png",1,"BBA-0004",2),
+  ("/Images/Women/Clothes/그래픽티/4/2.png",0,"BBA-0004",2),
+  ("/Images/Women/Clothes/그래픽티/4/3.png",0,"BBA-0004",2),
+  ("/Images/Women/Clothes/그래픽티/4/4.png",0,"BBA-0004",2),
+
+  ("/Images/Women/Clothes/그래픽티/5/1.png",1,"BBA-0005",2),
+  ("/Images/Women/Clothes/그래픽티/5/2.png",0,"BBA-0005",2),
+  ("/Images/Women/Clothes/그래픽티/5/3.png",0,"BBA-0005",2),
+  ("/Images/Women/Clothes/그래픽티/5/4.png",0,"BBA-0005",2),
+
+  ("/Images/Women/Clothes/그래픽티/6/1.png",1,"BBA-0006",2),
+  ("/Images/Women/Clothes/그래픽티/6/2.png",0,"BBA-0006",2),
+  ("/Images/Women/Clothes/그래픽티/6/3.png",0,"BBA-0006",2),
+  ("/Images/Women/Clothes/그래픽티/6/4.png",0,"BBA-0006",2),
+
+  
+  ("/Images/Women/Clothes/베이스레이어상의/1/1.png",1,"BBB-0001",2),
+  ("/Images/Women/Clothes/베이스레이어상의/1/2.png",0,"BBB-0001",2),
+  ("/Images/Women/Clothes/베이스레이어상의/1/3.png",0,"BBB-0001",2),
+  ("/Images/Women/Clothes/베이스레이어상의/1/4.png",0,"BBB-0001",2),
+    
+
+  ("/Images/Women/Clothes/베이스레이어하의/1/1.png",1,"BBC-0001",2),
+  ("/Images/Women/Clothes/베이스레이어하의/1/2.png",0,"BBC-0001",2),
+  ("/Images/Women/Clothes/베이스레이어하의/1/3.png",0,"BBC-0001",2),
+  ("/Images/Women/Clothes/베이스레이어하의/1/4.png",0,"BBC-0001",2), 
+
+
+  ("/Images/Women/Clothes/저지/1/1.png",1,"BBD-0001",2),
+  ("/Images/Women/Clothes/저지/1/2.png",0,"BBD-0001",2),
+  ("/Images/Women/Clothes/저지/1/3.png",0,"BBD-0001",2),
+  ("/Images/Women/Clothes/저지/1/4.png",0,"BBD-0001",2), 
+
+  ("/Images/Women/Clothes/저지/2/1.png",1,"BBD-0002",2),
+  ("/Images/Women/Clothes/저지/2/2.png",0,"BBD-0002",2),
+  ("/Images/Women/Clothes/저지/2/3.png",0,"BBD-0002",2),
+  ("/Images/Women/Clothes/저지/2/4.png",0,"BBD-0002",2), 
+
+
+  ("/Images/Women/Clothes/조거/1/1.png",1,"BBE-0001",2),
+  ("/Images/Women/Clothes/조거/1/2.png",0,"BBE-0001",2),
+  ("/Images/Women/Clothes/조거/1/3.png",0,"BBE-0001",2),
+  ("/Images/Women/Clothes/조거/1/4.png",0,"BBE-0001",2), 
+
+  ("/Images/Women/Clothes/조거/2/1.png",1,"BBE-0002",2),
+  ("/Images/Women/Clothes/조거/2/2.png",0,"BBE-0002",2),
+  ("/Images/Women/Clothes/조거/2/3.png",0,"BBE-0002",2),
+  ("/Images/Women/Clothes/조거/2/4.png",0,"BBE-0002",2), 
+
+  ("/Images/Women/Clothes/조거/3/1.png",1,"BBE-0003",2),
+  ("/Images/Women/Clothes/조거/3/2.png",0,"BBE-0003",2),
+  ("/Images/Women/Clothes/조거/3/3.png",0,"BBE-0003",2),
+  ("/Images/Women/Clothes/조거/3/4.png",0,"BBE-0003",2), 
+
+  ("/Images/Women/Clothes/조거/4/1.png",1,"BBE-0004",2),
+  ("/Images/Women/Clothes/조거/4/2.png",0,"BBE-0004",2),
+  ("/Images/Women/Clothes/조거/4/3.png",0,"BBE-0004",2),
+  ("/Images/Women/Clothes/조거/4/4.png",0,"BBE-0004",2), 
+
+
+  ("/Images/Kids/Clothes/그래픽티/1/1.png",1,"BCA-0001",2),
+  ("/Images/Kids/Clothes/그래픽티/1/2.png",0,"BCA-0001",2),
+  ("/Images/Kids/Clothes/그래픽티/1/3.png",0,"BCA-0001",2),
+  ("/Images/Kids/Clothes/그래픽티/1/4.png",0,"BCA-0001",2), 
+
+  ("/Images/Kids/Clothes/그래픽티/2/1.png",1,"BCA-0002",2),
+  ("/Images/Kids/Clothes/그래픽티/2/2.png",0,"BCA-0002",2),
+  ("/Images/Kids/Clothes/그래픽티/2/3.png",0,"BCA-0002",2),
+  ("/Images/Kids/Clothes/그래픽티/2/4.png",0,"BCA-0002",2), 
+
+  ("/Images/Kids/Clothes/그래픽티/3/1.png",1,"BCA-0003",2),
+  ("/Images/Kids/Clothes/그래픽티/3/2.png",0,"BCA-0003",2),
+  ("/Images/Kids/Clothes/그래픽티/3/3.png",0,"BCA-0003",2),
+  ("/Images/Kids/Clothes/그래픽티/3/4.png",0,"BCA-0003",2), 
+
+  ("/Images/Kids/Clothes/그래픽티/4/1.png",1,"BCA-0004",2),
+  ("/Images/Kids/Clothes/그래픽티/4/2.png",0,"BCA-0004",2),
+  ("/Images/Kids/Clothes/그래픽티/4/3.png",0,"BCA-0004",2),
+  ("/Images/Kids/Clothes/그래픽티/4/4.png",0,"BCA-0004",2), 
+
+
+  ("/Images/Kids/Clothes/베이스레이어상의/1/1.png",1,"BCB-0001",2),
+  ("/Images/Kids/Clothes/베이스레이어상의/1/2.png",0,"BCB-0001",2),
+  ("/Images/Kids/Clothes/베이스레이어상의/1/3.png",0,"BCB-0001",2),
+  ("/Images/Kids/Clothes/베이스레이어상의/1/4.png",0,"BCB-0001",2), 
+
+
+  ("/Images/Kids/Clothes/베이스레이어하의/1/1.png",1,"BCC-0001",2),
+  ("/Images/Kids/Clothes/베이스레이어하의/1/2.png",0,"BCC-0001",2),
+  ("/Images/Kids/Clothes/베이스레이어하의/1/3.png",0,"BCC-0001",2),
+  ("/Images/Kids/Clothes/베이스레이어하의/1/4.png",0,"BCC-0001",2), 
+
+
+  ("/Images/Kids/Clothes/저지/1/1.png",1,"BCD-0001",2),
+  ("/Images/Kids/Clothes/저지/1/2.png",0,"BCD-0001",2),
+  ("/Images/Kids/Clothes/저지/1/3.png",0,"BCD-0001",2),
+  ("/Images/Kids/Clothes/저지/1/4.png",0,"BCD-0001",2), 
+
+  ("/Images/Kids/Clothes/저지/2/1.png",1,"BCD-0002",2),
+  ("/Images/Kids/Clothes/저지/2/2.png",0,"BCD-0002",2),
+  ("/Images/Kids/Clothes/저지/2/3.png",0,"BCD-0002",2),
+  ("/Images/Kids/Clothes/저지/2/4.png",0,"BCD-0002",2), 
+
+  ("/Images/Kids/Clothes/저지/3/1.png",1,"BCD-0003",2),
+  ("/Images/Kids/Clothes/저지/3/2.png",0,"BCD-0003",2),
+  ("/Images/Kids/Clothes/저지/3/3.png",0,"BCD-0003",2),
+  ("/Images/Kids/Clothes/저지/3/4.png",0,"BCD-0003",2);
+
+insert into
+product_img_urls
+(name, is_main, style_code, category_id)
+values
+("/Images/Men/Accessories/Bag/1/1-1.png",1,"CAA-0001",3),
+("/Images/Men/Accessories/Bag/1/1-2.png",0,"CAA-0001",3),
+("/Images/Men/Accessories/Bag/2/2-1.png",1,"CAA-0002",3),
+("/Images/Men/Accessories/Bag/2/2-2.png",0,"CAA-0002",3),
+("/Images/Men/Accessories/Bag/3/3-1.png",1,"CAA-0003",3),
+("/Images/Men/Accessories/Bag/3/3-2.png",0,"CAA-0003",3),
+
+("/Images/Men/Accessories/Cap/1/1-1.png",1,"CAB-0001",3),
+("/Images/Men/Accessories/Cap/1/1-2.png",0,"CAB-0001",3),
+("/Images/Men/Accessories/Cap/2/2-1.png",1,"CAB-0002",3),
+("/Images/Men/Accessories/Cap/2/2-2.png",0,"CAB-0002",3),
+("/Images/Men/Accessories/Cap/3/3-1.png",1,"CAB-0003",3),
+("/Images/Men/Accessories/Cap/3/3-2.png",0,"CAB-0003",3),
+
+("/Images/Men/Accessories/Gloves/1/1-1.png",1,"CAC-0001",3),
+("/Images/Men/Accessories/Gloves/1/1-2.png",0,"CAC-0001",3),
+("/Images/Men/Accessories/Gloves/2/2-1.png",1,"CAC-0002",3),
+("/Images/Men/Accessories/Gloves/2/2-2.png",0,"CAC-0002",3),
+("/Images/Men/Accessories/Gloves/3/3-1.png",1,"CAC-0003",3),
+("/Images/Men/Accessories/Gloves/3/3-2.png",0,"CAC-0003",3),
+
+("/Images/Women/Accessories/Bag/1/1-1.png",1,"CBA-0001",3),
+("/Images/Women/Accessories/Bag/1/1-2.png",0,"CBA-0001",3),
+("/Images/Women/Accessories/Bag/2/2-1.png",1,"CBA-0002",3),
+("/Images/Women/Accessories/Bag/2/2-2.png",0,"CBA-0002",3),
+("/Images/Women/Accessories/Bag/3/3-1.png",1,"CBA-0003",3),
+("/Images/Women/Accessories/Bag/3/3-2.png",0,"CBA-0003",3),
+
+("/Images/Women/Accessories/Cap/1/1-1.png",1,"CBB-0001",3),
+("/Images/Women/Accessories/Cap/1/1-2.png",0,"CBB-0001",3),
+("/Images/Women/Accessories/Cap/2/2-1.png",1,"CBB-0002",3),
+("/Images/Women/Accessories/Cap/2/2-2.png",0,"CBB-0002",3),
+("/Images/Women/Accessories/Cap/3/3-1.png",1,"CBB-0003",3),
+("/Images/Women/Accessories/Cap/3/3-2.png",0,"CBB-0003",3),
+
+("/Images/Women/Accessories/Gloves/1/1-1.png",1,"CBC-0001",3),
+("/Images/Women/Accessories/Gloves/1/1-2.png",0,"CBC-0001",3),
+("/Images/Women/Accessories/Gloves/2/2-1.png",1,"CBC-0002",3),
+("/Images/Women/Accessories/Gloves/2/2-2.png",0,"CBC-0002",3),
+("/Images/Women/Accessories/Gloves/3/3-1.png",1,"CBC-0003",3),
+("/Images/Women/Accessories/Gloves/3/3-2.png",0,"CBC-0003",3),
+
+("/Images/Kids/Accessories/Bag/1/1-1.png",1,"CCA-0001",3),
+("/Images/Kids/Accessories/Bag/1/1-2.png",0,"CCA-0001",3),
+("/Images/Kids/Accessories/Bag/2/2-1.png",1,"CCA-0002",3),
+("/Images/Kids/Accessories/Bag/2/2-2.png",0,"CCA-0002",3),
+("/Images/Kids/Accessories/Bag/3/3-1.png",1,"CCA-0003",3),
+("/Images/Kids/Accessories/Bag/3/3-2.png",0,"CCA-0003",3),
+
+("/Images/Kids/Accessories/Cap/1/1-1.png",1,"CCB-0001",3),
+("/Images/Kids/Accessories/Cap/1/1-2.png",0,"CCB-0001",3),
+("/Images/Kids/Accessories/Cap/2/2-1.png",1,"CCB-0002",3),
+("/Images/Kids/Accessories/Cap/2/2-2.png",0,"CCB-0002",3),
+("/Images/Kids/Accessories/Cap/3/3-1.png",1,"CCB-0003",3),
+("/Images/Kids/Accessories/Cap/3/3-2.png",0,"CCB-0003",3),
+
+("/Images/Kids/Accessories/Gloves/1/1-1.png",1,"CCC-0001",3),
+("/Images/Kids/Accessories/Gloves/1/1-2.png",0,"CCC-0001",3),
+("/Images/Kids/Accessories/Gloves/2/2-1.png",1,"CCC-0002",3),
+("/Images/Kids/Accessories/Gloves/2/2-2.png",0,"CCC-0002",3);
+
+
+INSERT INTO 
+  snkrs_img_urls (name,is_main,style_code,category_id)
+VALUES
+  ("/Images/SNKRS/1/1.png",1,"DAA-0001",4),
+  ("/Images/SNKRS/1/2.png",0,"DAA-0001",4),
+  ("/Images/SNKRS/1/3.png",0,"DAA-0001",4),
+  ("/Images/SNKRS/1/4.png",0,"DAA-0001",4),
+
+  ("/Images/SNKRS/2/1.png",1,"DAA-0002",4),
+  ("/Images/SNKRS/2/2.png",0,"DAA-0002",4),
+  ("/Images/SNKRS/2/3.png",0,"DAA-0002",4),
+  ("/Images/SNKRS/2/4.png",0,"DAA-0002",4),
+
+  ("/Images/SNKRS/3/1.png",1,"DAA-0003",4),
+  ("/Images/SNKRS/3/2.png",0,"DAA-0003",4),
+  ("/Images/SNKRS/3/3.png",0,"DAA-0003",4),
+  ("/Images/SNKRS/3/4.png",0,"DAA-0003",4),
+  
+  ("/Images/SNKRS/4/1.png",1,"DAA-0004",4),
+  ("/Images/SNKRS/4/2.png",0,"DAA-0004",4),
+  ("/Images/SNKRS/4/3.png",0,"DAA-0004",4),
+  ("/Images/SNKRS/4/4.png",0,"DAA-0004",4);
