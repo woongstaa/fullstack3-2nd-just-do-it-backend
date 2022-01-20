@@ -1,5 +1,16 @@
-import { userServices } from '../services';
+import { productServices } from '../services';
 
-const a = () => {};
+const productDetail = async (req, res) => {
+  try {
+    const { style_code } = req.params;
 
-export default { a };
+    const data = await productServices.productDetail(style_code);
+
+    res.status(200).send({ message: '성공', data });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: '실패', err });
+  }
+};
+
+export default { productDetail };

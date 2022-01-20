@@ -27,17 +27,47 @@ const getProductData = async style_code => {
       product_colors ON color_id = product_colors.id
     JOIN
       product_genders ON gender_id = product_genders.id
-    JOIN
+    LEFT JOIN
       sub_icon ON sub_icon_id = sub_icon.id
-    JOIN
+    LEFT JOIN
       sub_brand ON sub_brand_id = sub_brand.id
-    JOIN
+    LEFT JOIN
       sub_clothes ON sub_clothes_id = sub_clothes.id
-    JOIN
+    LEFT JOIN
       sub_accessories ON sub_accessories_id = sub_accessories.id
     WHERE
-      products.style_code = "AAA-0001";
+      products.style_code = ${style_code};
   `;
 };
 
-export default { getProductData };
+const getProductImg = async style_code => {
+  return await prisma.$queryRaw`
+    SELECT
+      product_img_urls.name,
+      is_main
+    FROM
+      product_img_urls
+    JOIN
+      products ON products.style_code = product_img_urls.style_code
+    WHERE
+      product_img_urls.style_code = ${style_code};
+  `;
+};
+
+const getProductSize = async style_code => {
+  return await prisma.$queryRaw`
+    SELECT 
+      product_sizes.name as size,
+      product_with_sizes.quantity
+    FROM
+      product_with_sizes
+    JOIN
+      products ON products.style_code = product_with_sizes.style_code
+    JOIN
+      product_sizes ON product_size_id = product_sizes.id
+    WHERE
+      product_with_sizes.style_code = ${style_code};
+  `;
+};
+
+export default { getProductData, getProductImg, getProductSize };

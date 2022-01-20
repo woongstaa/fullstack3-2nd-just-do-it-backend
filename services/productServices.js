@@ -1,5 +1,14 @@
-import { userDao } from '../models';
+import { productDao } from '../models';
 
-const a = () => {};
+const productDetail = async style_code => {
+  const [productData] = await productDao.getProductData(style_code);
+  const productImg = await productDao.getProductImg(style_code);
+  const productSize = await productDao.getProductSize(style_code);
 
-export default { a };
+  productData.img = productImg;
+  productData.info = productSize;
+
+  return productData;
+};
+
+export default { productDetail };
