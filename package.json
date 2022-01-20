@@ -24,7 +24,9 @@
     "@babel/preset-env": "^7.16.8",
     "@prisma/client": "^3.8.1",
     "cors": "^2.8.5",
+    "cron": "^1.8.2",
     "express": "^4.17.2",
+    "node-cron": "^3.0.0",
     "prisma": "^3.8.1"
   },
   "devDependencies": {
