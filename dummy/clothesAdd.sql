@@ -1,5 +1,5 @@
 INSERT INTO 
-  PRODUCTS 
+  products 
   (style_code,name,category_id,color_id,gender_id,normal_price,sale_rate,sale_price,is_member,sub_brand_id,sub_clothes_id)
 VALUES
   ("BAA-0001", "나이키 리펠 베이퍼", 2,2,1,"135000",NULL,NULL,FALSE,2,3),

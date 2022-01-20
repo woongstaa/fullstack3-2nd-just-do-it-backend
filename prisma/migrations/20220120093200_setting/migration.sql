@@ -74,10 +74,9 @@ CREATE TABLE `snkrs` (
     `name` VARCHAR(191) NOT NULL,
     `category_id` INTEGER NOT NULL,
     `color_id` INTEGER NOT NULL,
-    `size_id` INTEGER NOT NULL,
     `gender_id` INTEGER NOT NULL,
     `price` VARCHAR(191) NOT NULL,
-    `quantity` INTEGER NOT NULL,
+    `is_open` BOOLEAN NULL DEFAULT false,
     `create_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     INDEX `style_code`(`style_code`),
