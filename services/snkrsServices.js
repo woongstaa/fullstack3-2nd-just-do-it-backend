@@ -12,6 +12,7 @@ const lottoBox = async (user_id, style_code, size) => {
     }
 
     await snkrsDao.addLottoBox(user_id, style_code, size);
+    await snkrsDao.insertWinner(style_code, user_id, size, false, 0);
 
     return;
   } else {
@@ -20,17 +21,19 @@ const lottoBox = async (user_id, style_code, size) => {
   }
 };
 
-const selectWinner = async style_code => {
+const selectWinner = async (style_code, count) => {
   const [getData] = await snkrsDao.getLottoBox2(style_code);
+  const currentPeople = await snkrsDao.getLottoBox3(style_code);
 
   if (getData.result === 1) {
     const [winnerInfo] = await snkrsDao.selectWinner(style_code);
-    await snkrsDao.insertWinner(
+    await snkrsDao.updateCount(
       winnerInfo.style_code,
-      winnerInfo.user_id,
-      winnerInfo.size
+      count,
+      currentPeople.length
     );
-    await snkrsDao.deleteLottoBox(winnerInfo.style_code);
+    await snkrsDao.updateWinner(winnerInfo.style_code, winnerInfo.user_id);
+    await snkrsDao.deleteLottoBox(style_code);
     console.log(winnerInfo);
     return;
   } else {
@@ -38,4 +41,8 @@ const selectWinner = async style_code => {
   }
 };
 
-export default { lottoBox, selectWinner };
+const getWinnerList = async user_id => {
+  return snkrsDao.getWinnerList(user_id);
+};
+
+export default { lottoBox, selectWinner, getWinnerList };

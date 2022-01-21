@@ -89,6 +89,7 @@ CREATE TABLE `snkrs_data` (
     `style_code` VARCHAR(191) NOT NULL,
     `user_id` INTEGER NOT NULL,
     `size` VARCHAR(191) NOT NULL,
+    `is_winner` BOOLEAN NOT NULL DEFAULT false,
     `create_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     INDEX `style_code`(`style_code`),
@@ -101,6 +102,8 @@ CREATE TABLE `snkrs_winners` (
     `style_code` VARCHAR(191) NOT NULL,
     `user_id` INTEGER NOT NULL,
     `size` VARCHAR(191) NOT NULL,
+    `is_winner` BOOLEAN NOT NULL DEFAULT false,
+    `count` INTEGER NOT NULL,
     `create_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
@@ -249,9 +252,6 @@ ALTER TABLE `snkrs_data` ADD CONSTRAINT `snkrs_data_style_code_fkey` FOREIGN KEY
 
 -- AddForeignKey
 ALTER TABLE `snkrs_data` ADD CONSTRAINT `snkrs_data_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `snkrs_data` ADD CONSTRAINT `snkrs_data_id_fkey` FOREIGN KEY (`id`) REFERENCES `snkrs_winners`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `product_with_sizes` ADD CONSTRAINT `product_with_sizes_product_size_id_fkey` FOREIGN KEY (`product_size_id`) REFERENCES `product_sizes`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

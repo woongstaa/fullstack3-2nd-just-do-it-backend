@@ -12,4 +12,16 @@ const lottoBox = async (req, res) => {
   }
 };
 
-export default { lottoBox };
+const getWinnerList = async (req, res) => {
+  try {
+    const { user_id } = req.body;
+
+    const data = await snkrsServices.getWinnerList(user_id);
+
+    res.status(200).send({ message: '성공', data });
+  } catch (err) {
+    res.status(500).send({ message: '실패', err: err.message });
+  }
+};
+
+export default { lottoBox, getWinnerList };

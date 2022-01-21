@@ -113,6 +113,7 @@ model snkrs_data {
   style_code String
   user_id    Int
   size       String
+  is_winner  Boolean   @default(false)
   create_at  DateTime? @default(now())
 
   snkrs snkrs @relation(fields: [style_code], references: [style_code])
@@ -126,6 +127,8 @@ model snkrs_winners {
   style_code String
   user_id    Int
   size       String
+  is_winner  Boolean   @default(false)
+  count      Int
   create_at  DateTime? @default(now())
 }
 
