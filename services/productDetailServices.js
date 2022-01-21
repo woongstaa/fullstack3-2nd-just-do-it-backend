@@ -1,14 +1,25 @@
 import { productDetailDao } from '../models';
 
 const productDetail = async style_code => {
-  const [productData] = await productDetailDao.getProductData(style_code);
-  const productImg = await productDetailDao.getProductImg(style_code);
-  const productSize = await productDetailDao.getProductSize(style_code);
+  if (style_code[0] === 'D') {
+    const [snkrsData] = await productDetailDao.getSnkrsData(style_code);
+    const snkrsImg = await productDetailDao.getSnkrsImg(style_code);
+    const snkrsSize = await productDetailDao.getSnkrsSize(style_code);
 
-  productData.img = productImg;
-  productData.info = productSize;
+    snkrsData.img = snkrsImg;
+    snkrsData.info = snkrsSize;
 
-  return productData;
+    return snkrsData;
+  } else {
+    const [productData] = await productDetailDao.getProductData(style_code);
+    const productImg = await productDetailDao.getProductImg(style_code);
+    const productSize = await productDetailDao.getProductSize(style_code);
+
+    productData.img = productImg;
+    productData.info = productSize;
+
+    return productData;
+  }
 };
 
 export default { productDetail };
