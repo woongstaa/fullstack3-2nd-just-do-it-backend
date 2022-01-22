@@ -45,4 +45,36 @@ const getReviewAverage = async (userId, styleCode) => {
   return review;
 };
 
-export default { postReview, getReview, getReviewAverage };
+const memberAuthorization = async userId => {
+  const member = await prisma.$queryRaw`
+    UPDATE
+      users
+    SET
+      is_member=1
+    WHERE
+      id=${userId};
+  `;
+
+  return '멤버쉽 가입이 완료되었습니다.';
+};
+
+const isAuthorization = async userId => {
+  const [member] = await prisma.$queryRaw`
+    SELECT
+      id
+    FROM
+      users
+    WHERE
+      id=${userId} and is_member=1;
+  `;
+
+  return member;
+};
+
+export default {
+  postReview,
+  getReview,
+  getReviewAverage,
+  memberAuthorization,
+  isAuthorization,
+};

@@ -60,4 +60,18 @@ const getReviewAverage = async (userId, styleCode) => {
   return review;
 };
 
-export default { postReview, getReview, getReviewAverage };
+const memberAuthorization = async userId => {
+  const authorization = await userDao.isAuthorization(userId);
+
+  if (authorization) {
+    const error = new Error('이미 Member 등급인 회원입니다.');
+    error.statusCode = 400;
+
+    throw error;
+  }
+
+  const member = await userDao.memberAuthorization(userId);
+  return member;
+};
+
+export default { postReview, getReview, getReviewAverage, memberAuthorization };
