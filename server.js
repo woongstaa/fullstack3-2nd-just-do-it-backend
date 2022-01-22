@@ -16,13 +16,13 @@ cron.schedule('*/1 * * * *', function () {
   snkrsDao.updataOpenClose(isOpen, 'DAA-0001');
   snkrsServices.selectWinner('DAA-0001', count);
 
-  // console.log('추첨 불가능상태');
+  console.log('추첨 불가능상태');
 });
 
 cron.schedule('*/2 * * * *', function () {
   isOpen = true;
   snkrsDao.updataOpenClose(isOpen, 'DAA-0001');
-  // console.log('추첨 가능');
+  console.log('추첨 가능');
 });
 
 app.use(cors());
