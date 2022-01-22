@@ -14,11 +14,13 @@ const productList = async (genderId, categoryId) => {
         products.sale_price,
         products.is_member,
         product_img_urls.name as imgUrl,
+        product_colors.name as colorName,
         products.color_id,
-        products.sub_brand_id,
-        products.sub_icon_id,
-        products.sub_clothes_id,
-        products.sub_accessories_id
+        sub_brand.name as subBrandName,
+        sub_icon.name as subIconName,
+        sub_clothes.name as subClothesName,
+        sub_accessories.name as subAccessoriesName
+
       FROM
         products
       JOIN
@@ -27,6 +29,17 @@ const productList = async (genderId, categoryId) => {
         categories ON products.category_id=categories.id
       JOIN
         product_img_urls ON products.style_code=product_img_urls.style_code
+      LEFT JOIN
+        product_colors ON products.color_id=product_colors.id
+      LEFT JOIN
+        sub_icon ON products.sub_icon_id=sub_icon.id
+      LEFT JOIN
+        sub_brand ON products.sub_brand_id=sub_brand.id
+      LEFT JOIN
+        sub_clothes ON products.sub_clothes_id=sub_clothes.id
+      LEFT JOIN
+        sub_accessories ON products.sub_accessories_id=sub_accessories.id
+
       WHERE
         product_img_urls.is_main=1
       AND
@@ -57,7 +70,7 @@ const snkrsList = async () => {
       categories ON snkrs.category_id=categories.id
     JOIN
       snkrs_img_urls ON snkrs.style_code=snkrs_img_urls.style_code
-    JOIN 
+    LEFT JOIN 
       product_colors ON snkrs.color_id=product_colors.id
     WHERE
       snkrs_img_urls.is_main=1;
