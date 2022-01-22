@@ -36,10 +36,10 @@ const getReviewAverage = async (userId, styleCode) => {
       (avg(color)+avg(size)+avg(comfort)+avg(width))/4 as totalAverage
     FROM 
       product_reviews
+      WHERE
+      style_code=${styleCode};
     GROUP BY
       style_code;
-    WHERE
-      user_id=${userId} and style_code=${styleCode};
   `;
 
   return review;
