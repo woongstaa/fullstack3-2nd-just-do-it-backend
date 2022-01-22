@@ -7,11 +7,7 @@ import cartControllers from './cartControllers';
 export {
   userController,
   productDetailController,
-<<<<<<< HEAD
   productListController,
   snkrsController,
-=======
-  snkrsController,
   cartControllers,
->>>>>>> develop
 };
