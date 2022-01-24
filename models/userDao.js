@@ -2,6 +2,29 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const createUser = async (email, name) => {
+  const createData = await prisma.$queryRaw`
+        INSERT INTO 
+          users (email, name) 
+        VALUES 
+          (${email}, ${name});
+        `;
+
+  return createData;
+};
+
+const isExistEmail = async email => {
+  const [user] = await prisma.$queryRaw`
+    SELECT 
+      email,name 
+    FROM 
+      users 
+    WHERE 
+      email = ${email};
+    `;
+  return user;
+};
+
 const postReview = async (userId, styleCode, color, size, comfort, width) => {
   const review = await prisma.$queryRaw`
     INSERT INTO 
@@ -77,4 +100,6 @@ export default {
   getReviewAverage,
   memberAuthorization,
   isAuthorization,
+  createUser,
+  isExistEmail,
 };

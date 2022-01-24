@@ -1,4 +1,17 @@
 import { userDao } from '../models';
+import token from '../utils/token';
+
+const signIn = async (email, name) => {
+  const isExist = await userDao.isExistEmail(email);
+
+  if (isExist) {
+    return token.signToken(email);
+  }
+  await userDao.createUser(email, name);
+
+  const signToken = token.signToken(email);
+  return signToken;
+};
 
 const postReview = async (userId, styleCode, color, size, comfort, width) => {
   const review = await userDao.getReview(
@@ -74,4 +87,10 @@ const memberAuthorization = async userId => {
   return member;
 };
 
-export default { postReview, getReview, getReviewAverage, memberAuthorization };
+export default {
+  postReview,
+  getReview,
+  getReviewAverage,
+  memberAuthorization,
+  signIn,
+};
