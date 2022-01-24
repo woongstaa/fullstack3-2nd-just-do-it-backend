@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const insertCart = async (style_code, user_id, size, quantity) => {
+const createCart = async (style_code, user_id, size, quantity) => {
   return await prisma.$queryRaw`
     INSERT INTO
       carts(
@@ -40,7 +40,7 @@ const checkCart = async (style_code, user_id, size) => {
   `;
 };
 
-const showCartList = async user_id => {
+const getCartList = async user_id => {
   return await prisma.$queryRaw`
     SELECT
       carts.id, 
@@ -51,7 +51,7 @@ const showCartList = async user_id => {
       products.normal_price,
       products.sale_rate,
       products.sale_price,
-      product_img_urls.name
+      product_img_urls.name as url
     FROM
       carts
     JOIN
@@ -65,42 +65,28 @@ const showCartList = async user_id => {
   `;
 };
 
-const updateCart = async (
-  style_code,
-  user_id,
-  currentSize,
-  afterSize,
-  quantity
-) => {
+const updateCart = async (cart_id, size, quantity) => {
   return await prisma.$queryRaw`
     UPDATE
       carts
     SET
       quantity = ${quantity},
-      size = ${afterSize}
+      size = ${size}
     WHERE
-      user_id = ${user_id}
-    AND
-      style_code = ${style_code}
-    AND
-      size = ${currentSize};
+      id = ${cart_id}
   `;
 };
 
-const deleteCart = async (style_code, user_id, size) => {
+const deleteCart = async cart_id => {
   return prisma.$queryRaw`
     DELETE FROM
       carts
     WHERE
-      user_id = ${user_id}
-    AND
-      style_code = (${style_code})
-    AND
-      size = ${size};
+      id = ${cart_id}
   `;
 };
 
-const allDeleteCart = async user_id => {
+const deleteAllCartByUser = async user_id => {
   return await prisma.$queryRaw`
     DELETE FROM
       carts
@@ -110,10 +96,10 @@ const allDeleteCart = async user_id => {
 };
 
 export default {
-  insertCart,
-  showCartList,
+  createCart,
+  getCartList,
   updateCart,
   checkCart,
   deleteCart,
-  allDeleteCart,
+  deleteAllCartByUser,
 };

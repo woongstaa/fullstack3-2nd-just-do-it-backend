@@ -1,7 +1,8 @@
 import { productDetailDao } from '../models';
+import { styleCodeType } from '../type';
 
 const productDetail = async style_code => {
-  if (style_code[0] === 'D') {
+  if (style_code[0] === styleCodeType.snkrs) {
     const [snkrsData] = await productDetailDao.getSnkrsData(style_code);
     const snkrsImg = await productDetailDao.getSnkrsImg(style_code);
     const snkrsSize = await productDetailDao.getSnkrsSize(style_code);

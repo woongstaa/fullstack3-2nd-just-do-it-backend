@@ -7,49 +7,38 @@ const createCart = async (style_code, user_id, size, quantity) => {
     return;
   }
 
-  const result = await cartDao.insertCart(style_code, user_id, size, quantity);
+  const result = await cartDao.createCart(style_code, user_id, size, quantity);
 
   return result;
 };
 
 const cartList = async user_id => {
-  const data = await cartDao.showCartList(user_id);
+  const data = await cartDao.getCartList(user_id);
 
   return data;
 };
 
-const updateCart = async (
-  style_code,
-  user_id,
-  currentSize,
-  afterSize,
-  quantity
-) => {
+const updateCart = async (user_id, cart_id, size, quantity) => {
   if (quantity > 10) {
-    return;
+    const err = new Error('10개이상 살 수 없습니다.');
+    throw err;
   }
 
-  await cartDao.updateCart(
-    style_code,
-    user_id,
-    currentSize,
-    afterSize,
-    quantity
-  );
+  await cartDao.updateCart(cart_id, size, quantity);
 
-  const data = await cartDao.showCartList(user_id);
+  const data = await cartDao.getCartList(user_id);
 
   return data;
 };
 
-const deleteCart = async (style_code, user_id, size) => {
-  if (style_code && user_id && size) {
-    await cartDao.deleteCart(style_code, user_id, size);
-    const result = await cartDao.showCartList(user_id);
+const deleteCart = async (cart_id, user_id) => {
+  if (cart_id && user_id) {
+    await cartDao.deleteCart(cart_id);
+    const result = await cartDao.getCartList(user_id);
     return result;
   } else {
-    await cartDao.allDeleteCart(user_id);
-    const result = await cartDao.showCartList(user_id);
+    await cartDao.deleteAllCartByUser(user_id);
+    const result = await cartDao.getCartList(user_id);
     return result;
   }
 };

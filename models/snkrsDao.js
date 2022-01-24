@@ -31,7 +31,7 @@ const addLottoBox = async (user_id, style_code, size) => {
   `;
 };
 
-const existLottoBox = async (user_id, style_code) => {
+const checkUserLottoBox = async (user_id, style_code) => {
   return await prisma.$queryRaw`
     SELECT EXISTS(
       SELECT
@@ -45,7 +45,7 @@ const existLottoBox = async (user_id, style_code) => {
     `;
 };
 
-const existWinnerBox = async style_code => {
+const checkUserWinnerBox = async style_code => {
   return await prisma.$queryRaw`
     SELECT EXISTS(
       SELECT
@@ -182,8 +182,8 @@ const getWinnerList = async (user_id, style_code) => {
 export default {
   updataOpenClose,
   addLottoBox,
-  existLottoBox,
-  existWinnerBox,
+  checkUserLottoBox,
+  checkUserWinnerBox,
   selectWinner,
   addWinnerBox,
   deleteLottoBox,
