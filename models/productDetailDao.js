@@ -72,25 +72,25 @@ const getProductSize = async style_code => {
 
 const getSnkrsData = async style_code => {
   return await prisma.$queryRaw`
-      SELECT
-        s.style_code,
-        s.name,
-        categories.name as category,
-        product_colors.name as color,
-        product_colors.color_hex as hex,
-        product_genders.name as gender,
-        price,
-        is_open
-      FROM
-        snkrs as s
-      JOIN
-        categories ON category_id = categories.id
-      JOIN
-        product_colors ON color_id = product_colors.id
-      JOIN
-        product_genders ON gender_id = product_genders.id
-      WHERE
-        s.style_code = ${style_code};
+    SELECT
+      s.style_code,
+      s.name,
+      categories.name as category,
+      product_colors.name as color,
+      product_colors.color_hex as hex,
+      product_genders.name as gender,
+      price,
+      is_open
+    FROM
+      snkrs as s
+    JOIN
+      categories ON category_id = categories.id
+    JOIN
+      product_colors ON color_id = product_colors.id
+    JOIN
+      product_genders ON gender_id = product_genders.id
+    WHERE
+      s.style_code = ${style_code};
 `;
 };
 

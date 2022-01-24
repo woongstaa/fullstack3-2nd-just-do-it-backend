@@ -25,7 +25,7 @@ const lottoSchedule = async () => {
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
       await snkrsServices.selectWinner(list[i].style_code);
 
-      // console.log(`${list[i].style_code} 추첨 불가능상태`);
+      // console.log(`${list[i].style_code} 추첨 불가능상태`);s
     });
   }
 };

@@ -1,10 +1,10 @@
 import { snkrsServices } from '../services';
 
-const lottoBox = async (req, res) => {
+const getLottoBox = async (req, res) => {
   try {
     const { user_id, style_code, size } = req.body;
 
-    const data = await snkrsServices.lottoBox(user_id, style_code, size);
+    const data = await snkrsServices.getLottoBox(user_id, style_code, size);
 
     res.status(200).send({ message: '성공', data });
   } catch (err) {
@@ -24,4 +24,4 @@ const getWinnerList = async (req, res) => {
   }
 };
 
-export default { lottoBox, getWinnerList };
+export default { getLottoBox, getWinnerList };
