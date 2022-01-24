@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const productList = async (genderId, categoryId) => {
+const productFilter = async (genderId, categoryId) => {
   const list = await prisma.$queryRaw`
       SELECT
         product_genders.name as genderName,
@@ -53,29 +53,18 @@ const productList = async (genderId, categoryId) => {
   return list;
 };
 
-const snkrsList = async () => {
-  const list = await prisma.$queryRaw`
-    SELECT
-      categories.name as categoryName,
-      snkrs.style_code,
-      snkrs.name as snkrsName,
-      snkrs.price,
-      snkrs_img_urls.name as imgUrl,
-      snkrs.color_id as colorId,
-      product_colors.name as colorName,
-      snkrs.is_open
+const getSizes = async styleCode => {
+  const sizes = await prisma.$queryRaw`
+    SELECT 
+      product_sizes.name as size
     FROM
-      snkrs
+      product_with_sizes
     JOIN
-      categories ON snkrs.category_id=categories.id
-    JOIN
-      snkrs_img_urls ON snkrs.style_code=snkrs_img_urls.style_code
-    LEFT JOIN 
-      product_colors ON snkrs.color_id=product_colors.id
+      product_sizes ON product_with_sizes.product_size_id=product_sizes.id
     WHERE
-      snkrs_img_urls.is_main=1;
+      product_with_sizes.style_code=${styleCode};
   `;
-  return list;
+  return sizes;
 };
 
-export default { productList, snkrsList };
+export default { productFilter, getSizes };
