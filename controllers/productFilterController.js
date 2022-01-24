@@ -2,13 +2,25 @@ import { productFilterServices } from '../services';
 
 const productFilter = async (req, res) => {
   try {
-    const { genderId, categoryId, colorId, sizeId } = req.query;
-    let newColorId = colorId.map(e => +e);
+    const {
+      genderId,
+      categoryId,
+      colorId,
+      sizeName,
+      subBrandName,
+      subIconName,
+      subClothesName,
+      subAccessoriesName,
+    } = req.query;
     const list = await productFilterServices.productFilter(
       genderId,
       categoryId,
-      newColorId,
-      sizeId
+      colorId,
+      sizeName,
+      subBrandName,
+      subIconName,
+      subClothesName,
+      subAccessoriesName
     );
     return res.status(200).json({ message: 'ProductFilterList', list });
   } catch (err) {

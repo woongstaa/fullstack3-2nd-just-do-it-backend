@@ -45,12 +45,26 @@ const productFilter = async (genderId, categoryId) => {
       AND
       CASE
       WHEN ${genderId} and ${categoryId} THEN products.gender_id = ${genderId} and products.category_id = ${categoryId}
-      WHEN ${genderId} and !${categoryId} THEN products.gender_id = ${genderId}
-      WHEN !${genderId} and ${categoryId} THEN products.category_id = ${categoryId}
+      WHEN ${genderId} THEN products.gender_id = ${genderId}
+      WHEN ${categoryId} THEN products.category_id = ${categoryId}
       ELSE TRUE
       END
   `;
   return list;
 };
 
-export default { productFilter };
+const getSizes = async styleCode => {
+  const sizes = await prisma.$queryRaw`
+    SELECT 
+      product_sizes.name as size
+    FROM
+      product_with_sizes
+    JOIN
+      product_sizes ON product_with_sizes.product_size_id=product_sizes.id
+    WHERE
+      product_with_sizes.style_code=${styleCode};
+  `;
+  return sizes;
+};
+
+export default { productFilter, getSizes };
