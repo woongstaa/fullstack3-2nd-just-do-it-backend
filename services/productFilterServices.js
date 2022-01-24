@@ -7,17 +7,13 @@ const productFilter = async (genderId, categoryId, colorId, sizeId) => {
     error.statusCode = 400;
     throw error;
   }
-  let newList = [];
   let colorSyntax = `x.color_id===${colorId[0]}`;
   for (let i = 1; i < colorId.length; i++) {
     colorSyntax += `||x.color_id===${colorId[i]}`;
   }
-  console.log('컬러신텍스', colorSyntax);
-
-  let a = list.filter(x => {
-    colorSyntax;
-  });
-  console.log(a);
+  let newList = list.filter(x => x.color_id === 4 || x.color_id === 13);
+  console.log('컬러신텍스:', colorSyntax);
+  console.log(newList);
   return list;
 };
 

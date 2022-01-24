@@ -8,6 +8,7 @@ const productList = async (genderId, categoryId) => {
     error.statusCode = 400;
     throw error;
   }
+  console.log('젠더아이디', genderId);
   return list;
 };
 

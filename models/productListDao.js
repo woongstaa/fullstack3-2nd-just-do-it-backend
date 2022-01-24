@@ -45,8 +45,8 @@ const productList = async (genderId, categoryId) => {
       AND
       CASE
       WHEN ${genderId} and ${categoryId} THEN products.gender_id = ${genderId} and products.category_id = ${categoryId}
-      WHEN ${genderId} and !${categoryId} THEN products.gender_id = ${genderId}
-      WHEN !${genderId} and ${categoryId} THEN products.category_id = ${categoryId}
+      WHEN ${genderId} THEN products.gender_id = ${genderId}
+      WHEN ${categoryId} THEN products.category_id = ${categoryId}
       ELSE TRUE
       END
   `;
