@@ -3,6 +3,7 @@ import { userController } from '../controllers';
 
 const router = express.Router();
 
+router.post('/signin', userController.signIn);
 router.post('/review', userController.postReview);
 router.get('/review', userController.getReview);
 router.get('/reviewAverage', userController.getReviewAverage);
