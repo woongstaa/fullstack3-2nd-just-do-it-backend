@@ -7,9 +7,10 @@ const createCart = async (style_code, user_id, size, quantity) => {
     return;
   }
 
-  const result = await cartDao.createCart(style_code, user_id, size, quantity);
+  await cartDao.createCart(style_code, user_id, size, quantity);
+  const data = await cartDao.getCartList(user_id);
 
-  return result;
+  return data;
 };
 
 const cartList = async user_id => {
