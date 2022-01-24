@@ -31,7 +31,7 @@ const addLottoBox = async (user_id, style_code, size) => {
   `;
 };
 
-const getLottoBox = async (user_id, style_code) => {
+const existLottoBox = async (user_id, style_code) => {
   return await prisma.$queryRaw`
     SELECT EXISTS(
       SELECT
@@ -45,21 +45,21 @@ const getLottoBox = async (user_id, style_code) => {
     `;
 };
 
-const getLottoBox2 = async style_code => {
+const existWinnerBox = async style_code => {
   return await prisma.$queryRaw`
     SELECT EXISTS(
       SELECT
         style_code,
         user_id
       FROM
-        snkrs_data
+        snkrs_winners
       WHERE
         style_code = ${style_code}
     ) as result;
     `;
 };
 
-const getLottoBox3 = async style_code => {
+const getNumOfParticipants = async style_code => {
   return await prisma.$queryRaw`
     SELECT
       style_code,
@@ -68,6 +68,17 @@ const getLottoBox3 = async style_code => {
       snkrs_data
     WHERE
       style_code = ${style_code};
+  `;
+};
+
+const getCount = async style_code => {
+  return await prisma.$queryRaw`
+    SELECT
+      MAX(count)
+    FROM  
+      snkrs_winners
+    WHERE
+      snkrs_winners.style_code = ${style_code};
   `;
 };
 
@@ -88,7 +99,7 @@ const selectWinner = async style_code => {
   `;
 };
 
-const insertWinner = async (style_code, user_id, size, is_winner, count) => {
+const addWinnerBox = async (style_code, user_id, size, is_winner, count) => {
   return await prisma.$queryRaw`
     INSERT INTO
       snkrs_winners(
@@ -147,7 +158,7 @@ const updateCount = async (style_code, count, currentPeople) => {
   `;
 };
 
-const getWinnerList = async user_id => {
+const getWinnerList = async (user_id, style_code) => {
   return await prisma.$queryRaw`
     SELECT
       style_code,
@@ -155,28 +166,32 @@ const getWinnerList = async user_id => {
       users.email,
       size,
       is_winner,
-      count
+      count,
+      create_at
     FROM
       snkrs_winners
     JOIN
       users ON user_id = users.id
     WHERE
-      user_id = ${user_id};
+      user_id = ${user_id}
+    AND
+      style_code = ${style_code};
   `;
 };
 
 export default {
   updataOpenClose,
   addLottoBox,
-  getLottoBox,
-  getLottoBox2,
+  existLottoBox,
+  existWinnerBox,
   selectWinner,
-  insertWinner,
+  addWinnerBox,
   deleteLottoBox,
   updateWinner,
   updateCount,
-  getLottoBox3,
+  getNumOfParticipants,
   getWinnerList,
+  getCount,
 };
 
 // insert into users(email,password,name,phone,is_member)
