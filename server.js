@@ -7,7 +7,7 @@ import { snkrsServices } from './services';
 import { productListDao } from './models';
 
 const app = express();
-const PORT = 8001;
+const PORT = 8000;
 
 const lottoSchedule = async () => {
   const list = await productListDao.snkrsList();
