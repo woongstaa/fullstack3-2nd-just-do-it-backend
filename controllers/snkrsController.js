@@ -14,9 +14,9 @@ const lottoBox = async (req, res) => {
 
 const getWinnerList = async (req, res) => {
   try {
-    const { user_id } = req.body;
+    const { user_id, style_code } = req.body;
 
-    const data = await snkrsServices.getWinnerList(user_id);
+    const data = await snkrsServices.getWinnerList(user_id, style_code);
 
     res.status(200).send({ message: '성공', data });
   } catch (err) {
