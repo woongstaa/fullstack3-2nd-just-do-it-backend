@@ -17,15 +17,12 @@ const lottoSchedule = async () => {
     cron.schedule('00 09 * * *', async () => {
       isOpen = true;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
-      // console.log(`${list[i].style_code} 추첨 가능`);
     });
 
     cron.schedule('30 09 * * *', async () => {
       isOpen = false;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
       await snkrsServices.selectWinner(list[i].style_code);
-
-      // console.log(`${list[i].style_code} 추첨 불가능상태`);s
     });
   }
 };
