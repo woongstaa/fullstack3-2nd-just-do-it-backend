@@ -1,10 +1,12 @@
 import { cartDao } from '../models';
+import { resultType } from '../type';
 
 const createCart = async (style_code, user_id, size, quantity) => {
   const [existItem] = await cartDao.checkCart(style_code, user_id, size);
 
-  if (existItem.result === 1) {
-    return;
+  if (existItem.result === resultType.EXIST) {
+    const err = new Error('이미 품목에 있습니다.');
+    throw err;
   }
 
   await cartDao.createCart(style_code, user_id, size, quantity);
