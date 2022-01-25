@@ -33,7 +33,6 @@ const postReview = async (req, res) => {
     );
 
     const REQUIRED_KEYS = { userId, styleCode, color, size, comfort, width };
-    console.log(REQUIRED_KEYS);
     for (let key in REQUIRED_KEYS) {
       if (!REQUIRED_KEYS[key]) {
         return res
@@ -53,15 +52,8 @@ const postReview = async (req, res) => {
 
 const getReview = async (req, res) => {
   try {
-    const { userId, styleCode, color, size, comfort, width } = req.body;
-    const review = await userServices.getReview(
-      userId,
-      styleCode,
-      color,
-      size,
-      comfort,
-      width
-    );
+    const { userId, styleCode } = req.body;
+    const review = await userServices.getReview(userId, styleCode);
 
     return res.status(200).json({ message: 'THIS_IS_REVIEW', review });
   } catch (err) {
@@ -72,8 +64,8 @@ const getReview = async (req, res) => {
 
 const getReviewAverage = async (req, res) => {
   try {
-    const { userId, styleCode } = req.body;
-    const review = await userServices.getReview(userId, styleCode);
+    const { styleCode } = req.body;
+    const review = await userServices.getReviewAverage(styleCode);
 
     return res.status(200).json({ message: 'THIS_IS_REVIEW_AVERAGE', review });
   } catch (err) {
@@ -84,8 +76,8 @@ const getReviewAverage = async (req, res) => {
 
 const memberAuthorization = async (req, res) => {
   try {
-    const { userId } = req.body;
-    const member = await userServices.memberAuthorization(userId);
+    const { email } = req.body;
+    const member = await userServices.memberAuthorization(email);
 
     return res.status(200).json({ message: 'MEMBERSHIP_SUCCESS', member });
   } catch (err) {

@@ -26,16 +26,16 @@ const isExistEmail = async email => {
 };
 
 const postReview = async (userId, styleCode, color, size, comfort, width) => {
-  const review = await prisma.$queryRaw`
+  const [review] = await prisma.$queryRaw`
     INSERT INTO 
       product_reviews (user_id, style_code, color, size, comfort, width) 
     VALUES 
       (${userId}, ${styleCode}, ${color}, ${size}, ${comfort}, ${width});
   `;
-  return '리뷰가 작성되었습니다.';
+  return review;
 };
 
-const getReview = async (userId, styleCode, color, size, comfort, width) => {
+const getReview = async (userId, styleCode) => {
   const [review] = await prisma.$queryRaw`
     SELECT 
       user_id, style_code, color, size, comfort, width
@@ -48,7 +48,7 @@ const getReview = async (userId, styleCode, color, size, comfort, width) => {
   return review;
 };
 
-const getReviewAverage = async (userId, styleCode) => {
+const getReviewAverage = async styleCode => {
   const [review] = await prisma.$queryRaw`
     SELECT 
       style_code,
@@ -60,7 +60,7 @@ const getReviewAverage = async (userId, styleCode) => {
     FROM 
       product_reviews
     WHERE
-      style_code=${styleCode};
+      style_code=${styleCode}
     GROUP BY
       style_code;
   `;
@@ -68,17 +68,17 @@ const getReviewAverage = async (userId, styleCode) => {
   return review;
 };
 
-const memberAuthorization = async userId => {
+const memberAuthorization = async email => {
   const member = await prisma.$queryRaw`
     UPDATE
       users
     SET
       is_member=1
     WHERE
-      id=${userId};
+      email=${email};
   `;
 
-  return '멤버쉽 가입이 완료되었습니다.';
+  return member;
 };
 
 const isAuthorization = async userId => {
