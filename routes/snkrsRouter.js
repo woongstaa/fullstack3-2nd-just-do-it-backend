@@ -4,7 +4,7 @@ import { productListController } from '../controllers';
 
 const router = express.Router();
 
-router.post('/', snkrsController.lottoBox);
+router.post('/', snkrsController.getLottoBox);
 router.get('/', snkrsController.getWinnerList);
 router.get('/list', productListController.snkrsList);
 

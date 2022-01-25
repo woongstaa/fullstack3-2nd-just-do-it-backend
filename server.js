@@ -4,26 +4,28 @@ import cors from 'cors';
 import cron from 'node-cron';
 import { snkrsDao } from './models';
 import { snkrsServices } from './services';
+import { productListDao } from './models';
 
 const app = express();
 const PORT = 8000;
-let count = 0;
-let isOpen = false;
 
-cron.schedule('*/1 * * * *', function () {
-  isOpen = false;
-  count += 0.5;
-  snkrsDao.updataOpenClose(isOpen, 'DAA-0001');
-  snkrsServices.selectWinner('DAA-0001', count);
+const lottoSchedule = async () => {
+  const list = await productListDao.snkrsList();
+  let isOpen = false;
 
-  console.log('추첨 불가능상태');
-});
+  for (let i = 0; i < list.length; i++) {
+    cron.schedule('00 09 * * *', async () => {
+      isOpen = true;
+      await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
+    });
 
-cron.schedule('*/2 * * * *', function () {
-  isOpen = true;
-  snkrsDao.updataOpenClose(isOpen, 'DAA-0001');
-  console.log('추첨 가능');
-});
+    cron.schedule('30 09 * * *', async () => {
+      isOpen = false;
+      await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
+      await snkrsServices.selectWinner(list[i].style_code);
+    });
+  }
+};
 
 app.use(cors());
 app.use(express.json());
@@ -39,3 +41,4 @@ const start = async () => {
 };
 
 start();
+lottoSchedule();

@@ -27,9 +27,9 @@ const createCart = async (req, res) => {
   }
 };
 
-const cartList = async (req, res) => {
+const listCart = async (req, res) => {
   try {
-    const { user_id } = req.body;
+    const { user_id } = req.params;
 
     const result = await cartServices.cartList(user_id);
 
@@ -42,13 +42,12 @@ const cartList = async (req, res) => {
 
 const updateCart = async (req, res) => {
   try {
-    const { style_code, user_id, currentSize, afterSize, quantity } = req.body;
+    const { user_id, cart_id, size, quantity } = req.body;
 
     const REQUIRED_KEYS = {
-      style_code,
       user_id,
-      currentSize,
-      afterSize,
+      cart_id,
+      size,
       quantity,
     };
 
@@ -60,13 +59,7 @@ const updateCart = async (req, res) => {
       }
     }
 
-    await cartServices.updateCart(
-      style_code,
-      user_id,
-      currentSize,
-      afterSize,
-      quantity
-    );
+    await cartServices.updateCart(user_id, cart_id, size, quantity);
     const result = await cartServices.cartList(user_id);
 
     res.status(200).send({ message: '성공', result });
@@ -78,9 +71,9 @@ const updateCart = async (req, res) => {
 
 const deleteCart = async (req, res) => {
   try {
-    const { style_code, user_id, size } = req.body;
+    const { cart_id, user_id } = req.body;
 
-    const result = await cartServices.deleteCart(style_code, user_id, size);
+    const result = await cartServices.deleteCart(cart_id, user_id);
 
     res.status(200).send({ message: '성공', result });
   } catch (err) {
@@ -89,4 +82,4 @@ const deleteCart = async (req, res) => {
   }
 };
 
-export default { createCart, cartList, updateCart, deleteCart };
+export default { createCart, listCart, updateCart, deleteCart };
