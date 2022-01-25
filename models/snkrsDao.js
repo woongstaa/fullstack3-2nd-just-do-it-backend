@@ -193,29 +193,3 @@ export default {
   getWinnerList,
   getCount,
 };
-
-// insert into users(email,password,name,phone,is_member)
-// values
-// ("clzlsqkq@naver.com","1234","이준혁","01023232332",true),
-// ("qqqqwwweer@naver.com","1234","김영욱","01023232332",true),
-// ("123123123@naver.com","1234","이진웅","01023232332",true),
-// ("123123123@naver.com","1234","황희윤","01023232332",true),
-// ("asddafjob@naver.com","1234","장종현","0101247128",true);
-// select * from snkrs_data order by RAND() limit 1;
-
-// SELECT
-// style_code,
-// users.name,
-// users.email,
-// size
-// FROM
-// snkrs_data
-// JOIN
-// users ON user_id = users.id
-// WHERE
-// style_code = ${style_code}
-// ORDER BY
-// rand()
-// LIMIT
-// 1;
-// `;

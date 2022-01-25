@@ -2,8 +2,8 @@ import { sign, verify } from 'jsonwebtoken';
 
 const salt = 'SALTSALTSALT';
 
-const signToken = email => {
-  return sign({ id: email }, salt, { expiresIn: '60m' });
+const signToken = id => {
+  return sign({ id }, salt, { expiresIn: '60m' });
 };
 
 const verifyToken = token => {
