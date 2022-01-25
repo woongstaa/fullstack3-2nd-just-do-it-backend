@@ -77,6 +77,23 @@ const updateCart = async (cart_id, size, quantity) => {
   `;
 };
 
+const updateQunantityItem = async cart_id => {
+  return await prisma.$queryRaw`
+    UPDATE
+      product_with_sizes
+    SET
+      quantity = quantity - (SELECT quantity FROM carts WHERE carts.id = ${cart_id})
+    WHERE
+      product_with_sizes.style_code = (SELECT style_code FROM carts WHERE carts.id = ${cart_id})
+    AND
+      product_size_id = (SELECT id FROM product_sizes WHERE name = (SELECT size FROM carts WHERE carts.id = ${cart_id}))
+    AND
+      (SELECT quantity FROM carts WHERE carts.id = ${cart_id}) <
+      (SELECT quantity FROM (SELECT quantity FROM product_with_sizes WHERE style_code = (SELECT style_code FROM carts WHERE carts.id = ${cart_id}) AND
+      product_size_id = (SELECT id FROM product_sizes WHERE name = (SELECT size FROM carts WHERE carts.id = ${cart_id}))) tmp);
+  `;
+};
+
 const deleteCart = async cart_id => {
   return prisma.$queryRaw`
     DELETE FROM
@@ -102,4 +119,5 @@ export default {
   checkCart,
   deleteCart,
   deleteAllCartByUser,
+  updateQunantityItem,
 };

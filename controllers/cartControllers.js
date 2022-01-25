@@ -82,4 +82,22 @@ const deleteCart = async (req, res) => {
   }
 };
 
-export default { createCart, listCart, updateCart, deleteCart };
+const updateQunantityItem = async (req, res) => {
+  try {
+    const { cart_id } = req.body;
+
+    const result = await cartServices.updateQunantityItem(cart_id);
+
+    res.status(200).send({ message: '성공', result });
+  } catch (err) {
+    res.status(500).send({ message: '실패', err });
+  }
+};
+
+export default {
+  createCart,
+  listCart,
+  updateCart,
+  deleteCart,
+  updateQunantityItem,
+};
