@@ -29,7 +29,7 @@ const createCart = async (req, res) => {
 
 const listCart = async (req, res) => {
   try {
-    const { user_id } = req.params;
+    const { user_id } = req.body;
 
     const result = await cartServices.cartList(user_id);
 

@@ -4,7 +4,7 @@ import { listDao } from '../models';
 import { statusType, resultType } from '../type';
 
 const getLottoBox = async (user_id, style_code, size) => {
-  const [snkrs] = await productDetailDao.getSnkrsData(style_code);
+  const [snkrs] = await detailDao.getSnkrsData(style_code);
   if (snkrs.is_open === statusType.OPEN) {
     const [getData] = await snkrsDao.checkUserLottoBox(user_id, style_code);
 
