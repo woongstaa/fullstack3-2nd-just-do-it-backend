@@ -40,15 +40,8 @@ const postReview = async (userId, styleCode, color, size, comfort, width) => {
   );
 };
 
-const getReview = async (userId, styleCode, color, size, comfort, width) => {
-  const review = await userDao.getReview(
-    userId,
-    styleCode,
-    color,
-    size,
-    comfort,
-    width
-  );
+const getReview = async (userId, styleCode) => {
+  const review = await userDao.getReview(userId, styleCode);
 
   if (!review) {
     const error = new Error('리뷰가 존재하지 않습니다.');
@@ -60,8 +53,8 @@ const getReview = async (userId, styleCode, color, size, comfort, width) => {
   return review;
 };
 
-const getReviewAverage = async (userId, styleCode) => {
-  const review = await userDao.getReviewAverage(userId, styleCode);
+const getReviewAverage = async styleCode => {
+  const review = await userDao.getReviewAverage(styleCode);
 
   if (!review) {
     const error = new Error('평균을 계산할 리뷰가 충분히 존재하지 않습니다.');
@@ -73,8 +66,9 @@ const getReviewAverage = async (userId, styleCode) => {
   return review;
 };
 
-const memberAuthorization = async userId => {
-  const authorization = await userDao.isAuthorization(userId);
+const memberAuthorization = async email => {
+  let verifiedEmail = token.verifyToken(email).id;
+  const authorization = await userDao.isAuthorization(verifiedEmail);
 
   if (authorization) {
     const error = new Error('이미 Member 등급인 회원입니다.');
@@ -83,7 +77,7 @@ const memberAuthorization = async userId => {
     throw error;
   }
 
-  const member = await userDao.memberAuthorization(userId);
+  const member = await userDao.memberAuthorization(verifiedEmail);
   return member;
 };
 
