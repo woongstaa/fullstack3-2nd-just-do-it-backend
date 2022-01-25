@@ -1,4 +1,11 @@
+import { detailDao } from '../models';
 import { productFilterDao } from '../models';
+import { listDao } from '../models';
+
+const productDetail = async style_code => {
+  const [productData] = await detailDao.getProductData(style_code);
+  return productData;
+};
 
 const productFilter = async (
   genderId,
@@ -126,4 +133,17 @@ const productFilter = async (
 
   return list;
 };
-export default { productFilter };
+
+const productList = async (genderId, categoryId) => {
+  const list = await listDao.productList(genderId, categoryId);
+
+  if (!list) {
+    const error = new Error('LIST NOT FOUND');
+    error.statusCode = 400;
+    throw error;
+  }
+  console.log('젠더아이디', genderId);
+  return list;
+};
+
+export default { productDetail, productList, productFilter };

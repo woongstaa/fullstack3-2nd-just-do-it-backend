@@ -3,13 +3,13 @@ import token from '../utils/token';
 
 const signIn = async (email, name) => {
   const isExist = await userDao.isExistEmail(email);
-
+  let userId = await userDao.getUserId(email);
   if (isExist) {
-    return token.signToken(email);
+    return token.signToken(userId);
   }
   await userDao.createUser(email, name);
-
-  const signToken = token.signToken(email);
+  userId = await userDao.getUserId(email);
+  const signToken = token.signToken(userId);
   return signToken;
 };
 
@@ -66,18 +66,16 @@ const getReviewAverage = async styleCode => {
   return review;
 };
 
-const memberAuthorization = async email => {
-  let verifiedEmail = token.verifyToken(email).id;
-  const authorization = await userDao.isAuthorization(verifiedEmail);
+const memberAuthorization = async userId => {
+  const authorization = await userDao.isAuthorization(userId);
 
   if (authorization) {
     const error = new Error('이미 Member 등급인 회원입니다.');
     error.statusCode = 400;
-
     throw error;
   }
 
-  const member = await userDao.memberAuthorization(verifiedEmail);
+  const member = await userDao.memberAuthorization(userId);
   return member;
 };
 
