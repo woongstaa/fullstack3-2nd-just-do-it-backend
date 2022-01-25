@@ -32,9 +32,7 @@ CREATE TABLE `categories` (
 CREATE TABLE `users` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(191) NOT NULL,
-    `password` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `phone` VARCHAR(191) NOT NULL,
     `is_member` BOOLEAN NOT NULL DEFAULT false,
     `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 

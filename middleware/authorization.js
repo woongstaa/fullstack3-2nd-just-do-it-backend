@@ -4,8 +4,6 @@ import { userDao } from '../models';
 
 const authentication = (req, res, next) => {
   const token = req.body.user_id; // token가져오기
-  console.log(token);
-  console.log(verifyToken(token));
   const validToken = verifyToken(token);
   if (validToken) {
     req.body.user_id = validToken.id[0].id;
