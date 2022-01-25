@@ -1,14 +1,11 @@
 import express from 'express';
-import {
-  productDetailController,
-  productFilterController,
-} from '../controllers';
-import { productListController } from '../controllers';
+
+import { productController } from '../controllers';
 
 const router = express.Router();
 
-router.get('/detail/:style_code', productDetailController.productDetail);
-router.get('/list', productListController.productList);
-router.get('/filter', productFilterController.productFilter);
+router.get('/detail/:style_code', productController.productDetail);
+router.get('/list', productController.productList);
+router.get('/filter', productController.productFilter);
 
 export default router;

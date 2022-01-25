@@ -2,15 +2,16 @@ import express from 'express';
 import routes from './routes';
 import cors from 'cors';
 import cron from 'node-cron';
+import { config } from './utils/config';
 import { snkrsDao } from './models';
 import { snkrsServices } from './services';
-import { productListDao } from './models';
+import { listDao } from './models';
 
 const app = express();
 const PORT = 8000;
 
 const lottoSchedule = async () => {
-  const list = await productListDao.snkrsList();
+  const list = await listDao.snkrsList();
   let isOpen = false;
 
   for (let i = 0; i < list.length; i++) {

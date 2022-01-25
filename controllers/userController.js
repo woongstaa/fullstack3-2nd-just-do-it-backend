@@ -76,8 +76,8 @@ const getReviewAverage = async (req, res) => {
 
 const memberAuthorization = async (req, res) => {
   try {
-    const { email } = req.body;
-    const member = await userServices.memberAuthorization(email);
+    const { user_id } = req.body;
+    const member = await userServices.memberAuthorization(user_id);
 
     return res.status(200).json({ message: 'MEMBERSHIP_SUCCESS', member });
   } catch (err) {
