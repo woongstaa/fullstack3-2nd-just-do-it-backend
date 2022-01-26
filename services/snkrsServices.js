@@ -1,6 +1,4 @@
 import { snkrsDao } from '../models';
-import { detailDao } from '../models';
-import { listDao } from '../models';
 import { statusType, resultType } from '../type';
 
 const getLottoBox = async (user_id, style_code, size) => {
@@ -51,7 +49,7 @@ const getWinnerList = async (user_id, style_code) => {
 };
 
 const snkrsList = async () => {
-  const list = await listDao.snkrsList();
+  const list = await snkrsDao.getSnkrsList();
 
   if (!list) {
     const error = new Error('LIST NOT FOUND');
@@ -62,7 +60,7 @@ const snkrsList = async () => {
 };
 
 const snkrsDetail = async style_code => {
-  const [snkrsData] = await detailDao.getSnkrsData(style_code);
+  const [snkrsData] = await snkrsDao.getSnkrsData(style_code);
   return snkrsData;
 };
 
