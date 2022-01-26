@@ -15,6 +15,7 @@ CREATE TABLE `products` (
     `sub_brand_id` INTEGER NULL,
     `sub_clothes_id` INTEGER NULL,
     `sub_accessories_id` INTEGER NULL,
+    `review_counts` INTEGER NULL DEFAULT 0,
 
     INDEX `style_code`(`style_code`),
     PRIMARY KEY (`id`)
@@ -87,7 +88,7 @@ CREATE TABLE `snkrs_data` (
     `style_code` VARCHAR(191) NOT NULL,
     `user_id` INTEGER NOT NULL,
     `size` VARCHAR(191) NOT NULL,
-    `is_winner` BOOLEAN NOT NULL DEFAULT false,
+    `is_winner` BOOLEAN NULL DEFAULT false,
     `create_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     INDEX `style_code`(`style_code`),
@@ -100,8 +101,8 @@ CREATE TABLE `snkrs_winners` (
     `style_code` VARCHAR(191) NOT NULL,
     `user_id` INTEGER NOT NULL,
     `size` VARCHAR(191) NOT NULL,
-    `is_winner` BOOLEAN NOT NULL DEFAULT false,
-    `count` INTEGER NOT NULL,
+    `is_winner` BOOLEAN NULL DEFAULT false,
+    `count` INTEGER NULL DEFAULT 0,
     `create_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
