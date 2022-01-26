@@ -2,7 +2,7 @@ import { snkrsDao } from '../models';
 import { statusType, resultType } from '../type';
 
 const getLottoBox = async (user_id, style_code, size) => {
-  const [snkrs] = await detailDao.getSnkrsData(style_code);
+  const [snkrs] = await snkrsDao.getSnkrsData(style_code);
   if (snkrs.is_open === statusType.OPEN) {
     const [getData] = await snkrsDao.checkUserLottoBox(user_id, style_code);
 
@@ -12,7 +12,7 @@ const getLottoBox = async (user_id, style_code, size) => {
     }
 
     await snkrsDao.addLottoBox(user_id, style_code, size);
-    await snkrsDao.addWinnerBox(style_code, user_id, size, false, 0);
+    await snkrsDao.addWinnerBox(style_code, user_id, size);
 
     return;
   } else {

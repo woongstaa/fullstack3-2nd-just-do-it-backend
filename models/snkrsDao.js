@@ -19,14 +19,12 @@ const addLottoBox = async (user_id, style_code, size) => {
       snkrs_data(
         style_code,
         user_id,
-        size,
-        is_winner
+        size
       )
     VALUES(
       ${style_code},
       ${user_id},
-      ${size},
-      false
+      ${size}
     );
   `;
 };
@@ -99,22 +97,18 @@ const selectWinner = async style_code => {
   `;
 };
 
-const addWinnerBox = async (style_code, user_id, size, is_winner, count) => {
+const addWinnerBox = async (style_code, user_id, size) => {
   return await prisma.$queryRaw`
     INSERT INTO
       snkrs_winners(
         style_code,
         user_id,
-        size,
-        is_winner,
-        count
+        size
       )
     VALUES(
       ${style_code},
       ${user_id},
-      ${size},
-      ${is_winner},
-      ${count}
+      ${size}
     );
   `;
 };
