@@ -43,12 +43,13 @@ const productFilter = async (genderId, categoryId) => {
       WHERE
         product_img_urls.is_main=1
       AND
-      CASE
-      WHEN ${genderId} and ${categoryId} THEN products.gender_id = ${genderId} and products.category_id = ${categoryId}
-      WHEN ${genderId} THEN products.gender_id = ${genderId}
-      WHEN ${categoryId} THEN products.category_id = ${categoryId}
-      ELSE TRUE
-      END
+        CASE
+        WHEN ${genderId} and ${categoryId} THEN products.gender_id = ${genderId} and products.category_id = ${categoryId}
+        WHEN ${genderId} THEN products.gender_id = ${genderId}
+        WHEN ${categoryId} THEN products.category_id = ${categoryId}
+        ELSE TRUE
+        END
+    
   `;
   return list;
 };

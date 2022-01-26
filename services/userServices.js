@@ -14,14 +14,7 @@ const signIn = async (email, name) => {
 };
 
 const postReview = async (userId, styleCode, color, size, comfort, width) => {
-  const review = await userDao.getReview(
-    userId,
-    styleCode,
-    color,
-    size,
-    comfort,
-    width
-  );
+  const review = await userDao.getReview(userId, styleCode);
 
   if (review) {
     const error = new Error('이미 작성한 리뷰가 존재합니다.');
