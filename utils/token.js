@@ -1,9 +1,10 @@
 import { sign, verify } from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const salt = 'SALTSALTSALT';
+dotenv.config();
 
 const signToken = id => {
-  return sign({ id }, salt, { expiresIn: '60m' });
+  return sign({ id }, process.env.salt, { expiresIn: '60m' });
 };
 
 const verifyToken = token => {

@@ -13,7 +13,7 @@ const productDetail = async (req, res) => {
   }
 };
 
-const productFilter = async (req, res) => {
+const productList = async (req, res) => {
   try {
     const {
       genderId,
@@ -26,7 +26,8 @@ const productFilter = async (req, res) => {
       subAccessoriesName,
       sortMethod,
     } = req.query;
-    const list = await productServices.productFilter(
+
+    const list = await productServices.productList(
       genderId,
       categoryId,
       colorId,
@@ -44,16 +45,4 @@ const productFilter = async (req, res) => {
   }
 };
 
-const productList = async (req, res) => {
-  try {
-    const { genderId, categoryId } = req.query;
-    console.log('젠더아이디', genderId);
-    const list = await productServices.productList(genderId, categoryId);
-    return res.status(200).json({ message: 'ProductList', list });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ message: 'Load Fail' });
-  }
-};
-
-export default { productDetail, productFilter, productList };
+export default { productDetail, productList };
