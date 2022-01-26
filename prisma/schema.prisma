@@ -26,6 +26,7 @@ model products {
   sub_brand_id       Int?
   sub_clothes_id     Int?
   sub_accessories_id Int?
+  review_counts      Int?      @default(0)
 
   categories         categories           @relation(fields: [category_id], references: [id])
   product_colors     product_colors?      @relation(fields: [color_id], references: [id])

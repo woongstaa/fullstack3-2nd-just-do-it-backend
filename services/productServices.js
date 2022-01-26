@@ -15,9 +15,14 @@ const productFilter = async (
   subBrandName,
   subIconName,
   subClothesName,
-  subAccessoriesName
+  subAccessoriesName,
+  sortMethod
 ) => {
-  let list = await productFilterDao.productFilter(genderId, categoryId);
+  let list = await productFilterDao.productFilter(
+    genderId,
+    categoryId,
+    sortMethod
+  );
 
   if (!list) {
     const error = new Error('LIST NOT FOUND');
@@ -50,7 +55,6 @@ const productFilter = async (
     list = list.filter(x => eval(colorSyntax));
   }
 
-  console.log(sizeName);
   if (sizeName) {
     let sizeSyntax = ``;
     if (typeof sizeName === 'string') {

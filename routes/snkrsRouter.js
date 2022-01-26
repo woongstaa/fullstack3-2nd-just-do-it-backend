@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/detail/:style_code', snkrsController.snkrsDetail);
 router.post('/', auth.authentication, snkrsController.getLottoBox);
-router.get('/', auth.authentication, snkrsController.getWinnerList);
+router.put('/', auth.authentication, snkrsController.getWinnerList);
 router.get('/list', snkrsController.snkrsList);
 
 export default router;
