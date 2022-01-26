@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const productFilter = async (genderId, categoryId) => {
+const productFilter = async (genderId, categoryId, sortMethod) => {
   const list = await prisma.$queryRaw`
       SELECT
         product_genders.name as genderName,
@@ -20,7 +20,6 @@ const productFilter = async (genderId, categoryId) => {
         sub_icon.name as subIconName,
         sub_clothes.name as subClothesName,
         sub_accessories.name as subAccessoriesName
-
       FROM
         products
       JOIN
@@ -39,16 +38,24 @@ const productFilter = async (genderId, categoryId) => {
         sub_clothes ON products.sub_clothes_id=sub_clothes.id
       LEFT JOIN
         sub_accessories ON products.sub_accessories_id=sub_accessories.id
-
+ 
       WHERE
         product_img_urls.is_main=1
       AND
-      CASE
-      WHEN ${genderId} and ${categoryId} THEN products.gender_id = ${genderId} and products.category_id = ${categoryId}
-      WHEN ${genderId} THEN products.gender_id = ${genderId}
-      WHEN ${categoryId} THEN products.category_id = ${categoryId}
-      ELSE TRUE
-      END
+        CASE
+        WHEN ${genderId} and ${categoryId} THEN products.gender_id = ${genderId} and products.category_id = ${categoryId}
+        WHEN ${genderId} THEN products.gender_id = ${genderId}
+        WHEN ${categoryId} THEN products.category_id = ${categoryId}
+        ELSE TRUE
+        END
+      
+      ORDER BY
+        case WHEN ${sortMethod} = 1 then products.create_at end ASC,
+        case WHEN ${sortMethod} = 2 then products.review_counts end DESC,
+        case WHEN ${sortMethod} = 3 then products.name end DESC,
+        case WHEN ${sortMethod} = 4 then products.sale_rate end DESC,
+        case WHEN ${sortMethod} = 5 then products.normal_price end ASC,
+        case WHEN ${sortMethod} = 6 then products.normal_price end DESC;
   `;
   return list;
 };
