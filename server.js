@@ -15,15 +15,17 @@ const lottoSchedule = async () => {
   let isOpen = false;
 
   for (let i = 0; i < list.length; i++) {
-    cron.schedule('00 09 * * *', async () => {
+    cron.schedule('56 21 * * *', async () => {
       isOpen = true;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
+      console.log('시작');
     });
 
-    cron.schedule('30 09 * * *', async () => {
+    cron.schedule('57 21 * * *', async () => {
       isOpen = false;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
       await snkrsServices.selectWinner(list[i].style_code);
+      console.log('마감');
     });
   }
 };
