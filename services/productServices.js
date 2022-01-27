@@ -14,7 +14,8 @@ const productList = async (
   subIconName,
   subClothesName,
   subAccessoriesName,
-  sortMethod
+  sortMethod,
+  search
 ) => {
   const arrayChange = filterValue => {
     if (filterValue) {
@@ -31,6 +32,10 @@ const productList = async (
     } else return filterValue;
   };
 
+  let isSearch = false;
+
+  if (search) isSearch = true;
+
   let list = await productDao.getProductList(
     genderId,
     categoryId,
@@ -39,7 +44,9 @@ const productList = async (
     arrayChange(subIconName),
     arrayChange(subClothesName),
     arrayChange(subAccessoriesName),
-    sortMethod
+    sortMethod,
+    search,
+    isSearch
   );
 
   if (list) {

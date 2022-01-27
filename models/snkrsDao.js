@@ -155,21 +155,24 @@ const updateCount = async (style_code, count, currentPeople) => {
 const getWinnerList = async (user_id, style_code) => {
   return await prisma.$queryRaw`
     SELECT
-      style_code,
+      snkrs_winners.style_code,
       users.name,
       users.email,
       size,
       is_winner,
       count,
-      create_at
+      snkrs.name as product_name,
+      snkrs_winners.create_at
     FROM
       snkrs_winners
     JOIN
       users ON user_id = users.id
+    JOIN
+      snkrs ON snkrs_winners.style_code = snkrs.style_code
     WHERE
       user_id = ${user_id}
     AND
-      style_code = ${style_code};
+      snkrs_winners.style_code = ${style_code};
   `;
 };
 
