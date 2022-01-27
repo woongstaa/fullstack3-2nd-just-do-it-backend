@@ -25,6 +25,7 @@ const productList = async (req, res) => {
       subClothesName,
       subAccessoriesName,
       sortMethod,
+      search,
     } = req.query;
 
     const list = await productServices.productList(
@@ -36,7 +37,8 @@ const productList = async (req, res) => {
       subIconName,
       subClothesName,
       subAccessoriesName,
-      +sortMethod
+      +sortMethod,
+      search
     );
     return res.status(200).json({ message: 'ProductFilterList', list });
   } catch (err) {
