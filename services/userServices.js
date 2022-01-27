@@ -22,7 +22,7 @@ const postReview = async (userId, styleCode, color, size, comfort, width) => {
 
     throw error;
   }
-
+  await userDao.countPlus(styleCode);
   return await userDao.postReview(
     userId,
     styleCode,

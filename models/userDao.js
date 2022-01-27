@@ -43,9 +43,21 @@ const postReview = async (userId, styleCode, color, size, comfort, width) => {
     INSERT INTO 
       product_reviews (user_id, style_code, color, size, comfort, width) 
     VALUES 
-      (${userId}, ${styleCode}, ${color}, ${size}, ${comfort}, ${width}); 
+      (${userId}, ${styleCode}, ${color}, ${size}, ${comfort}, ${width})
   `;
   return review;
+};
+
+const countPlus = async styleCode => {
+  const [count] = await prisma.$queryRaw`
+    UPDATE
+      products
+    SET
+      review_counts=review_counts+1
+    WHERE
+      style_code = ${styleCode}
+  `;
+  return count;
 };
 
 const getReview = async (userId, styleCode) => {
@@ -116,4 +128,5 @@ export default {
   createUser,
   isExistEmail,
   getUserId,
+  countPlus,
 };
