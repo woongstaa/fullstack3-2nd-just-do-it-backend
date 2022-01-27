@@ -16,13 +16,13 @@ const lottoSchedule = async () => {
   let isOpen = false;
 
   for (let i = 0; i < list.length; i++) {
-    cron.schedule('6 23 * * *', async () => {
+    cron.schedule('23 14 * * *', async () => {
       isOpen = true;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
       console.log('시작');
     });
 
-    cron.schedule('9 23 * * *', async () => {
+    cron.schedule('50 14 * * *', async () => {
       isOpen = false;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
       await snkrsServices.selectWinner(list[i].style_code);

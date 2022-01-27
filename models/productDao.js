@@ -9,7 +9,9 @@ const getProductList = async (
   subIconName,
   subClothesName,
   subAccessoriesName,
-  sortMethod
+  sortMethod,
+  search,
+  isSearch
 ) => {
   let filterQuery = ``;
   if (colorId) {
@@ -64,6 +66,8 @@ const getProductList = async (
       LEFT JOIN
         sub_accessories ON products.sub_accessories_id=sub_accessories.id
       WHERE
+        If(${isSearch},products.name like '%${raw(search)}%',TRUE)
+      AND
         product_img_urls.is_main=1
       AND
         CASE

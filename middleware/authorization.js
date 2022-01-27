@@ -7,7 +7,6 @@ dotenv.config();
 const authentication = (req, res, next) => {
   const token = req.body.user_id; // token가져오기
   const validToken = verifyToken(token);
-  console.log('확인:', validToken);
   if (validToken) {
     req.body.user_id = validToken.id[0].id;
     next();
@@ -31,7 +30,6 @@ const memberProductBuying = async (req, res, next) => {
 // 토큰 확인 절차
 const verifyToken = token => {
   try {
-    console.log(process.env.salt);
     return verify(token, process.env.salt);
   } catch (err) {
     return null;
