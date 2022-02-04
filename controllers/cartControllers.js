@@ -55,7 +55,7 @@ const updateCart = async (req, res) => {
 
     if (quantity > 10) {
       const err = new Error('10개이상 살 수 없습니다.');
-      err.status = 400;
+      err.status = 409;
       throw err;
     }
 

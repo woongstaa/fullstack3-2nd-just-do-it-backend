@@ -7,9 +7,9 @@ const createUsersToLottoBox = async (user_id, style_code, size) => {
   const [checkStyleCode] = await snkrsDao.isExistStyleCode(style_code);
   const [checkSize] = await snkrsDao.isExistSizes(style_code, size);
 
-  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 409);
+  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 404);
   isExistStyleCode.notExistErr('유효하지 않는 styleCode 입니다.');
-  const isExistSize = new IsExistItem(checkSize, resultType, 409);
+  const isExistSize = new IsExistItem(checkSize, resultType, 404);
   isExistSize.notExistErr('유효하지 않는 size 입니다.');
 
   if (snkrs.is_open === statusType.OPEN) {
@@ -54,7 +54,7 @@ const selectWinner = async style_code => {
 
 const getWinnerList = async (user_id, style_code) => {
   const [checkStyleCode] = await snkrsDao.isExistStyleCode(style_code);
-  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 409);
+  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 404);
   isExistStyleCode.notExistErr('유효하지 않는 styleCode 입니다.');
 
   return snkrsDao.getWinnerList(user_id, style_code);
@@ -73,7 +73,7 @@ const snkrsList = async () => {
 
 const snkrsDetail = async style_code => {
   const [checkStyleCode] = await snkrsDao.isExistStyleCode(style_code);
-  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 409);
+  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 404);
   isExistStyleCode.notExistErr('유효하지 않는 styleCode 입니다.');
   const [snkrsData] = await snkrsDao.getSnkrsData(style_code);
   return snkrsData;

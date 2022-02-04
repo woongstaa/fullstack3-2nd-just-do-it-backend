@@ -7,10 +7,10 @@ const createCart = async (style_code, user_id, size, quantity) => {
   const [checkSize] = await productDao.isExistSizes(style_code, size);
   const [checkStyleCode] = await productDao.isExistStyleCode(style_code);
 
-  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 409);
+  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 404);
   isExistStyleCode.notExistErr('유효하지 않는 styleCode 입니다.');
 
-  const isExistSize = new IsExistItem(checkSize, resultType, 409);
+  const isExistSize = new IsExistItem(checkSize, resultType, 404);
   isExistSize.notExistErr('유효하지 않는 size 입니다.');
 
   const isExistItem = new IsExistItem(check, resultType, 409);
@@ -31,7 +31,7 @@ const cartList = async user_id => {
 const updateCart = async (user_id, cart_id, size, quantity) => {
   const [check] = await cartDao.checkCartId(cart_id);
 
-  const isExistItem = new IsExistItem(check, resultType, 409);
+  const isExistItem = new IsExistItem(check, resultType, 404);
   isExistItem.notExistErr('존재하지 않는 CartId 입니다.');
 
   await cartDao.updateCart(cart_id, size, quantity);
@@ -43,7 +43,7 @@ const updateCart = async (user_id, cart_id, size, quantity) => {
 const deleteCart = async (cart_id, user_id) => {
   if (cart_id && user_id) {
     const [check] = await cartDao.checkCartId(cart_id);
-    const isExistItem = new IsExistItem(check, resultType, 400);
+    const isExistItem = new IsExistItem(check, resultType, 404);
     isExistItem.notExistErr('존재하지 않는 CartId 입니다.');
     await cartDao.deleteCart(cart_id);
     const result = await cartDao.getCartList(user_id);
@@ -58,7 +58,7 @@ const deleteCart = async (cart_id, user_id) => {
 const updateQunantityItem = async cart_id => {
   for (let i = 0; i < cart_id.length; i++) {
     const [check] = await cartDao.checkCartId(cart_id[i]);
-    const isExistItem = new IsExistItem(check, resultType, 400);
+    const isExistItem = new IsExistItem(check, resultType, 404);
     isExistItem.notExistErr('존재하지 않는 CartId 입니다.');
     await cartDao.updateQunantityItem(cart_id[i]);
   }
