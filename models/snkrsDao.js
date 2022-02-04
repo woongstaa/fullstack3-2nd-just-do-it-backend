@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import { AffectedRow } from '../utils/err';
+import { createType, updateType } from '../type';
 
 const prisma = new PrismaClient();
 
@@ -14,7 +16,7 @@ const updataOpenClose = async (bool, style_code) => {
 };
 
 const addLottoBox = async (user_id, style_code, size) => {
-  return await prisma.$queryRaw`
+  await prisma.$queryRaw`
     INSERT INTO
       snkrs_data(
         style_code,
@@ -26,6 +28,72 @@ const addLottoBox = async (user_id, style_code, size) => {
       ${user_id},
       ${size}
     );
+  `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+  const newRow = new AffectedRow(row, createType, 409);
+  newRow.result();
+
+  return;
+};
+
+const addWinnerBox = async (user_id, style_code, size) => {
+  await prisma.$queryRaw`
+    INSERT INTO
+      snkrs_winners(
+        style_code,
+        user_id,
+        size
+      )
+    VALUES(
+      ${style_code},
+      ${user_id},
+      ${size}
+    );
+  `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, createType, 409);
+  newRow.result();
+
+  return;
+};
+
+const isExistStyleCode = async style_code => {
+  return await prisma.$queryRaw`
+    SELECT EXISTS(
+      SELECT
+        style_code
+      FROM
+        snkrs
+      WHERE
+        style_code = ${style_code}
+    ) as result
+  `;
+};
+
+const isExistSizes = async (style_code, size) => {
+  return await prisma.$queryRaw`
+    SELECT EXISTS(
+      SELECT
+        snkrs.style_code,
+        product_sizes.name
+      FROM
+        snkrs
+      JOIN
+        snkrs_with_sizes ON snkrs_with_sizes.style_code = snkrs.style_code
+      JOIN
+        product_sizes ON snkrs_with_sizes.product_size_id = product_sizes.id
+      WHERE
+        snkrs.style_code = ${style_code}
+      AND
+        product_sizes.name = ${size}
+    ) as result;
   `;
 };
 
@@ -97,33 +165,28 @@ const selectWinner = async style_code => {
   `;
 };
 
-const addWinnerBox = async (style_code, user_id, size) => {
-  return await prisma.$queryRaw`
-    INSERT INTO
-      snkrs_winners(
-        style_code,
-        user_id,
-        size
-      )
-    VALUES(
-      ${style_code},
-      ${user_id},
-      ${size}
-    );
-  `;
-};
-
 const deleteLottoBox = async style_code => {
-  return await prisma.$queryRaw`
+  const currentPeople = await getNumOfParticipants(style_code);
+
+  await prisma.$queryRaw`
     DELETE FROM
       snkrs_data
     WHERE
       style_code = ${style_code};
   `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, currentPeople.length, 409);
+  newRow.results();
+
+  return;
 };
 
 const updateWinner = async (style_code, user_id) => {
-  return await prisma.$queryRaw`
+  await prisma.$queryRaw`
     UPDATE
       snkrs_winners
     SET
@@ -135,10 +198,19 @@ const updateWinner = async (style_code, user_id) => {
     LIMIT
       1;
   `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, updateType, 409);
+  newRow.result();
+
+  return;
 };
 
 const updateCount = async (style_code, count, currentPeople) => {
-  return await prisma.$queryRaw`
+  await prisma.$queryRaw`
     UPDATE
       snkrs_winners
     SET
@@ -150,6 +222,14 @@ const updateCount = async (style_code, count, currentPeople) => {
     LIMIT
       ${currentPeople}
   `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, currentPeople, 409);
+  newRow.results();
+  return;
 };
 
 const getWinnerList = async (user_id, style_code) => {
@@ -253,4 +333,6 @@ export default {
   getCount,
   getSnkrsList,
   getSnkrsData,
+  isExistStyleCode,
+  isExistSizes,
 };

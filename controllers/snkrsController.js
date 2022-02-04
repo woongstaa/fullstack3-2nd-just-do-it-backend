@@ -1,14 +1,19 @@
 import { snkrsServices } from '../services';
+import { RequiredKeys } from '../utils/err';
 
-const getLottoBox = async (req, res) => {
+const createUsersToLottoBox = async (req, res) => {
   try {
     const { user_id, style_code, size } = req.body;
+    const REQUIRED_KEYS = { user_id, style_code, size };
 
-    const data = await snkrsServices.getLottoBox(user_id, style_code, size);
+    const keys = new RequiredKeys(REQUIRED_KEYS);
+    keys.verify();
 
-    res.status(200).send({ message: '성공', data });
+    await snkrsServices.createUsersToLottoBox(user_id, style_code, size);
+
+    res.status(201).send({ message: '성공' });
   } catch (err) {
-    res.status(500).send({ message: '실패', err: err.message });
+    res.status(err.status || 500).send({ message: '실패', err: err.message });
   }
 };
 
@@ -16,11 +21,16 @@ const getWinnerList = async (req, res) => {
   try {
     const { user_id, style_code } = req.body;
 
+    const REQUIRED_KEYS = { user_id, style_code };
+
+    const keys = new RequiredKeys(REQUIRED_KEYS);
+    keys.verify();
+
     const data = await snkrsServices.getWinnerList(user_id, style_code);
 
     res.status(200).send({ message: '성공', data });
   } catch (err) {
-    res.status(500).send({ message: '실패', err: err.message });
+    res.status(err.status || 500).send({ message: '실패', err: err.message });
   }
 };
 
@@ -43,8 +53,8 @@ const snkrsDetail = async (req, res) => {
     res.status(200).send({ message: '성공', data });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: '실패', err });
+    res.status(err.status || 500).send({ message: '실패', err: err.message });
   }
 };
 
-export default { getLottoBox, getWinnerList, snkrsList, snkrsDetail };
+export default { createUsersToLottoBox, getWinnerList, snkrsList, snkrsDetail };
