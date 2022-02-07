@@ -13,7 +13,7 @@ const authentication = async (req, res, next) => {
 
     if (validToken) {
       const [check] = await userDao.isExistUser(validToken.id[0].id);
-      const isExsitUser = new IsExistItem(check, resultType, 409);
+      const isExsitUser = new IsExistItem(check, resultType, 404);
       isExsitUser.notExistErr('존재하지 않는 UserId 입니다.');
       req.body.user_id = validToken.id[0].id;
     } else {
