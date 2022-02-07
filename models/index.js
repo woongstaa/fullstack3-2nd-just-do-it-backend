@@ -1,8 +1,6 @@
 import userDao from './userDao';
-import detailDao from './detailDao';
-import listDao from './listDao';
-import productFilterDao from './productFilterDao';
+import productDao from './productDao';
 import snkrsDao from './snkrsDao';
 import cartDao from './cartDao';
 
-export { userDao, detailDao, snkrsDao, listDao, productFilterDao, cartDao };
+export { userDao, productDao, snkrsDao, cartDao };

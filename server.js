@@ -2,26 +2,27 @@ import express from 'express';
 import routes from './routes';
 import cors from 'cors';
 import cron from 'node-cron';
-import { config } from './utils/config';
 import { snkrsDao } from './models';
 import { snkrsServices } from './services';
-import { listDao } from './models';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 const lottoSchedule = async () => {
-  const list = await listDao.snkrsList();
+  const list = await snkrsDao.getSnkrsList();
   let isOpen = false;
 
   for (let i = 0; i < list.length; i++) {
-    cron.schedule('56 21 * * *', async () => {
+    cron.schedule(`26 18 * * *`, async () => {
       isOpen = true;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
       console.log('시작');
     });
 
-    cron.schedule('57 21 * * *', async () => {
+    cron.schedule(`${(i + 1) * 5} 38 18 * * *`, async () => {
       isOpen = false;
       await snkrsDao.updataOpenClose(isOpen, list[i].style_code);
       await snkrsServices.selectWinner(list[i].style_code);

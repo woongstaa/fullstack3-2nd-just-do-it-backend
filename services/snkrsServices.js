@@ -1,34 +1,40 @@
 import { snkrsDao } from '../models';
-import { detailDao } from '../models';
-import { listDao } from '../models';
 import { statusType, resultType } from '../type';
+import { IsExistItem } from '../utils/err';
 
-const getLottoBox = async (user_id, style_code, size) => {
-  const [snkrs] = await detailDao.getSnkrsData(style_code);
+const createUsersToLottoBox = async (user_id, style_code, size) => {
+  const [snkrs] = await snkrsDao.getSnkrsData(style_code);
+  const [checkStyleCode] = await snkrsDao.isExistStyleCode(style_code);
+  const [checkSize] = await snkrsDao.isExistSizes(style_code, size);
+
+  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 404);
+  isExistStyleCode.notExistErr('유효하지 않는 styleCode 입니다.');
+  const isExistSize = new IsExistItem(checkSize, resultType, 404);
+  isExistSize.notExistErr('유효하지 않는 size 입니다.');
+
   if (snkrs.is_open === statusType.OPEN) {
-    const [getData] = await snkrsDao.checkUserLottoBox(user_id, style_code);
+    const [check] = await snkrsDao.checkUserLottoBox(user_id, style_code);
 
-    if (getData.result === resultType.EXIST) {
-      const err = new Error('이미 추첨하셨습니다.');
-      throw err;
-    }
+    const isExistItem = new IsExistItem(check, resultType, 409);
+    isExistItem.existErr('이미 추첨을 하셨습니다.');
 
     await snkrsDao.addLottoBox(user_id, style_code, size);
-    await snkrsDao.addWinnerBox(style_code, user_id, size, false, 0);
+    await snkrsDao.addWinnerBox(user_id, style_code, size);
 
     return;
-  } else {
+  } else if (snkrs.is_open === statusType.CLOSE) {
     const err = new Error('추첨기간이 아닙니다');
+    err.status = 409;
     throw err;
   }
 };
 
 const selectWinner = async style_code => {
-  const [getData] = await snkrsDao.checkUserWinnerBox(style_code);
-  const participants = await snkrsDao.getNumOfParticipants(style_code);
+  const [check] = await snkrsDao.checkUserWinnerBox(style_code);
   const [count] = await snkrsDao.getCount(style_code);
+  const participants = await snkrsDao.getNumOfParticipants(style_code);
 
-  if (getData.result === resultType.EXIST) {
+  if (check.result === resultType.EXIST) {
     const [winnerInfo] = await snkrsDao.selectWinner(style_code);
 
     await snkrsDao.updateCount(
@@ -47,11 +53,15 @@ const selectWinner = async style_code => {
 };
 
 const getWinnerList = async (user_id, style_code) => {
+  const [checkStyleCode] = await snkrsDao.isExistStyleCode(style_code);
+  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 404);
+  isExistStyleCode.notExistErr('유효하지 않는 styleCode 입니다.');
+
   return snkrsDao.getWinnerList(user_id, style_code);
 };
 
 const snkrsList = async () => {
-  const list = await listDao.snkrsList();
+  const list = await snkrsDao.getSnkrsList();
 
   if (!list) {
     const error = new Error('LIST NOT FOUND');
@@ -62,12 +72,15 @@ const snkrsList = async () => {
 };
 
 const snkrsDetail = async style_code => {
-  const [snkrsData] = await detailDao.getSnkrsData(style_code);
+  const [checkStyleCode] = await snkrsDao.isExistStyleCode(style_code);
+  const isExistStyleCode = new IsExistItem(checkStyleCode, resultType, 404);
+  isExistStyleCode.notExistErr('유효하지 않는 styleCode 입니다.');
+  const [snkrsData] = await snkrsDao.getSnkrsData(style_code);
   return snkrsData;
 };
 
 export default {
-  getLottoBox,
+  createUsersToLottoBox,
   selectWinner,
   getWinnerList,
   snkrsList,

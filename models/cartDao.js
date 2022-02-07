@@ -1,9 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import { createType, updateType, deleteType } from '../type';
+import { AffectedRow } from '../utils/err';
 
 const prisma = new PrismaClient();
 
 const createCart = async (style_code, user_id, size, quantity) => {
-  return await prisma.$queryRaw`
+  await prisma.$queryRaw`
     INSERT INTO
       carts(
         style_code,
@@ -19,6 +21,15 @@ const createCart = async (style_code, user_id, size, quantity) => {
         ${quantity}
       );
   `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, createType, 409);
+  newRow.result();
+
+  return;
 };
 
 const checkCart = async (style_code, user_id, size) => {
@@ -36,6 +47,19 @@ const checkCart = async (style_code, user_id, size) => {
         style_code = ${style_code}
       AND
         size = ${size}
+    ) as result
+  `;
+};
+
+const checkCartId = async cart_id => {
+  return await prisma.$queryRaw`
+    SELECT EXISTS(
+      SELECT
+        user_id
+      FROM
+        carts
+      WHERE
+        carts.id = ${cart_id}
     ) as result
   `;
 };
@@ -66,7 +90,7 @@ const getCartList = async user_id => {
 };
 
 const updateCart = async (cart_id, size, quantity) => {
-  return await prisma.$queryRaw`
+  await prisma.$queryRaw`
     UPDATE
       carts
     SET
@@ -75,10 +99,19 @@ const updateCart = async (cart_id, size, quantity) => {
     WHERE
       id = ${cart_id}
   `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, updateType, 409);
+  newRow.result();
+
+  return;
 };
 
 const updateQunantityItem = async cart_id => {
-  return await prisma.$queryRaw`
+  await prisma.$queryRaw`
     UPDATE
       product_with_sizes
     SET
@@ -92,24 +125,60 @@ const updateQunantityItem = async cart_id => {
       (SELECT quantity FROM (SELECT quantity FROM product_with_sizes WHERE style_code = (SELECT style_code FROM carts WHERE carts.id = ${cart_id}) AND
       product_size_id = (SELECT id FROM product_sizes WHERE name = (SELECT size FROM carts WHERE carts.id = ${cart_id}))) tmp);
   `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, updateType, 409);
+  newRow.result();
+
+  return;
 };
 
 const deleteCart = async cart_id => {
-  return prisma.$queryRaw`
+  await prisma.$queryRaw`
     DELETE FROM
       carts
     WHERE
-      id = ${cart_id}
+      id = ${cart_id};
   `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, deleteType, 409);
+  newRow.result();
+
+  return;
 };
 
 const deleteAllCartByUser = async user_id => {
-  return await prisma.$queryRaw`
+  const [checkCountOfCart] = await prisma.$queryRaw`
+    select
+      count(id) as count
+    FROM
+      carts
+    WHERE
+      user_id = ${user_id};
+  `;
+
+  await prisma.$queryRaw`
     DELETE FROM
       carts
     WHERE
       user_id = ${user_id}
     `;
+
+  const [row] = await prisma.$queryRaw`
+    SELECT ROW_COUNT() as result;
+  `;
+
+  const newRow = new AffectedRow(row, checkCountOfCart.count, 409);
+  newRow.results();
+
+  return;
 };
 
 export default {
@@ -120,4 +189,5 @@ export default {
   deleteCart,
   deleteAllCartByUser,
   updateQunantityItem,
+  checkCartId,
 };

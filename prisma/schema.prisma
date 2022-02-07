@@ -26,6 +26,7 @@ model products {
   sub_brand_id       Int?
   sub_clothes_id     Int?
   sub_accessories_id Int?
+  review_counts      Int?      @default(0)
 
   categories         categories           @relation(fields: [category_id], references: [id])
   product_colors     product_colors?      @relation(fields: [color_id], references: [id])
@@ -111,7 +112,7 @@ model snkrs_data {
   style_code String
   user_id    Int
   size       String
-  is_winner  Boolean   @default(false)
+  is_winner  Boolean?  @default(false)
   create_at  DateTime? @default(now())
 
   snkrs snkrs @relation(fields: [style_code], references: [style_code])
@@ -125,8 +126,8 @@ model snkrs_winners {
   style_code String
   user_id    Int
   size       String
-  is_winner  Boolean   @default(false)
-  count      Int
+  is_winner  Boolean?  @default(false)
+  count      Int?      @default(0)
   create_at  DateTime? @default(now())
 }
 

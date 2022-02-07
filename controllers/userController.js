@@ -22,9 +22,9 @@ const signIn = async (req, res) => {
 
 const postReview = async (req, res) => {
   try {
-    const { userId, styleCode, color, size, comfort, width } = req.body;
+    const { user_id, styleCode, color, size, comfort, width } = req.body;
     const review = await userServices.postReview(
-      userId,
+      user_id,
       styleCode,
       color,
       size,
@@ -32,7 +32,7 @@ const postReview = async (req, res) => {
       width
     );
 
-    const REQUIRED_KEYS = { userId, styleCode, color, size, comfort, width };
+    const REQUIRED_KEYS = { user_id, styleCode, color, size, comfort, width };
     for (let key in REQUIRED_KEYS) {
       if (!REQUIRED_KEYS[key]) {
         return res
@@ -43,7 +43,7 @@ const postReview = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: 'REVIEW_POSTED', userId, styleCode });
+      .json({ message: 'REVIEW_POSTED', user_id, styleCode });
   } catch (err) {
     console.log(err);
     return res.status(err.statusCode || 500).json({ message: err.message });
@@ -52,8 +52,8 @@ const postReview = async (req, res) => {
 
 const getReview = async (req, res) => {
   try {
-    const { userId, styleCode } = req.body;
-    const review = await userServices.getReview(userId, styleCode);
+    const { user_id, styleCode } = req.body;
+    const review = await userServices.getReview(user_id, styleCode);
 
     return res.status(200).json({ message: 'THIS_IS_REVIEW', review });
   } catch (err) {
