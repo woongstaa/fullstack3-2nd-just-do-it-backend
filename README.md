@@ -57,6 +57,18 @@
 - 이준혁
 
 - 김영욱
+  - 리스트 페이지 API
+    - 카테고리에 따라 분류된 모든 제품 Read (R of CRUD)
+  - 필터 API
+    - Query Parameter를 통해 받아온 정보(색상,사이즈,브랜드 등)의 필터링 기능 구현
+  - 소셜 로그인 연동 (카카오 로그인 API)
+    - kakao developers 공식문서 활용
+    - REST API KEY, Access Token 활용
+  - 리뷰 API
+    - Token으로 받은 UserId와 제품의 StyleCode에 따른 리뷰 기능 구성
+    - 리뷰 작성 기능과, 작성된 리뷰 데이터의 평균치를 반환 (Create & Read OF CRUD)
+  - 유저 인증 인가 Middleware
+    - 회원 비회원 여부를 Middleware를 통해 인가 권한 부여 (Router 내의 Middleware 적용)
 
 
 ## 동영상 링크 및 결과물 스크린샷
