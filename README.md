@@ -58,7 +58,7 @@
 
 - 김영욱
   - 리스트 페이지 API
-    - 카테고리에 따라 분류된 모든 제품 Read (R of CRUD)
+    - 카테고리에 따라 분류된 모든 제품 Read (Read of CRUD)
   - 필터 API
     - Query Parameter를 통해 받아온 정보(색상,사이즈,브랜드 등)의 필터링 기능 구현
   - 소셜 로그인 연동 (카카오 로그인 API)
