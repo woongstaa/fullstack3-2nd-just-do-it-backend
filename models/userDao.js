@@ -15,6 +15,19 @@ const getUserId = async email => {
   return createData;
 };
 
+const isExistUser = async user_id => {
+  return await prisma.$queryRaw`
+    SELECT EXISTS(
+      SELECT
+        id
+      FROM
+        users
+      WHERE
+        id = ${user_id}
+    ) as result
+  `;
+};
+
 const createUser = async (email, name) => {
   const createData = await prisma.$queryRaw`
         INSERT INTO 
@@ -129,4 +142,5 @@ export default {
   isExistEmail,
   getUserId,
   countPlus,
+  isExistUser,
 };

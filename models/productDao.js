@@ -154,4 +154,43 @@ const getProductData = async style_code => {
   `;
 };
 
-export default { getProductList, getSizes, getProductData };
+const isExistStyleCode = async style_code => {
+  return await prisma.$queryRaw`
+    SELECT EXISTS(
+      SELECT
+        style_code
+      FROM
+        products
+      WHERE
+        style_code = ${style_code}
+    ) as result
+  `;
+};
+
+const isExistSizes = async (style_code, size) => {
+  return await prisma.$queryRaw`
+    SELECT EXISTS(
+      SELECT
+        products.style_code,
+        product_sizes.name
+      FROM
+        products
+      JOIN
+        product_with_sizes ON product_with_sizes.style_code = products.style_code
+      JOIN
+        product_sizes ON product_with_sizes.product_size_id = product_sizes.id
+      WHERE
+        products.style_code = ${style_code}
+      AND
+        product_sizes.name = ${size}
+    ) as result;
+  `;
+};
+
+export default {
+  getProductList,
+  getSizes,
+  getProductData,
+  isExistStyleCode,
+  isExistSizes,
+};
