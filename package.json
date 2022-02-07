@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon server.js --exec babel-node"
   },
   "repository": {
@@ -34,8 +34,10 @@
     "dotenv": "^14.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
-    "prettier-plugin-prisma": "^3.8.0"
+    "prettier-plugin-prisma": "^3.8.0",
+    "supertest": "^6.2.2"
   }
 }

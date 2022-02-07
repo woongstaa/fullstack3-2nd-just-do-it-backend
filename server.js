@@ -1,6 +1,4 @@
-import express from 'express';
-import routes from './routes';
-import cors from 'cors';
+import app from './app';
 import cron from 'node-cron';
 import { snkrsDao } from './models';
 import { snkrsServices } from './services';
@@ -8,7 +6,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const app = express();
 const PORT = process.env.PORT;
 
 const lottoSchedule = async () => {
@@ -30,10 +27,6 @@ const lottoSchedule = async () => {
     });
   }
 };
-
-app.use(cors());
-app.use(express.json());
-app.use(routes);
 
 const start = async () => {
   try {
