@@ -29,7 +29,7 @@ const lottoSchedule = async () => {
       console.log('마감');
     });
   }
-};
+}; // lottoScheduler를 별도의 모듈로 분리하여 사용 -> server.js 만들 때와 마찬가지로 db 연결해주어야 함.
 
 app.use(cors());
 app.use(express.json());

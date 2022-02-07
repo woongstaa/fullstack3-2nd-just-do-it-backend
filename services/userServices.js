@@ -60,6 +60,7 @@ const getReviewAverage = async styleCode => {
 };
 
 const memberAuthorization = async userId => {
+  // const upgradeUserIntoMemeber(userId)
   const authorization = await userDao.isAuthorization(userId);
 
   if (authorization) {
@@ -69,6 +70,7 @@ const memberAuthorization = async userId => {
   }
 
   const member = await userDao.memberAuthorization(userId);
+  // const member = await userDao.updateUserIntoMember(userId);
   return member;
 };
 
