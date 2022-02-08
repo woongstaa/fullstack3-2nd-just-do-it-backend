@@ -18,8 +18,8 @@
 
 ## 레포지토리 주소
 
-- [프론트엔드 깃허브](https://github.com/wecode-bootcamp-korea/fullstack3-2nd-just-do-it-frontend)
-- [백엔드 깃허브](https://github.com/wecode-bootcamp-korea/fullstack3-2nd-just-do-it-backend)
+- [프론트엔드 깃허브](https://github.com/woongstaa/fullstack3-2nd-just-do-it-frontend)
+- [백엔드 깃허브](https://github.com/woongstaa/fullstack3-2nd-just-do-it-backend)
 
 ## 사용한 기술 스택
 
