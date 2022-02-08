@@ -25,30 +25,6 @@ const createCart = async (req, res) => {
   }
 };
 
-// const addMemberProductsInCart = async (req, res) => {
-//   try {
-//     const { style_code, size, quantity, is_member } = req.body;
-//     const { user_id } = req;
-//     console.log(user_id);
-//     const REQUIRED_KEYS = { style_code, user_id, size, quantity, is_member };
-
-//     const keys = new RequiredKeys(REQUIRED_KEYS);
-//     keys.verify();
-
-//     const result = await cartServices.createCart(
-//       style_code,
-//       user_id,
-//       size,
-//       quantity,
-//       is_member
-//     );
-
-//     res.status(201).send({ message: '성공', result });
-//   } catch (err) {
-//     res.status(err.status || 500).send({ message: '실패', err: err.message });
-//   }
-// };
-
 const listCart = async (req, res) => {
   try {
     const { user_id } = req;
