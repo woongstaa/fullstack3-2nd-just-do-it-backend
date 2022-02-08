@@ -1,8 +1,15 @@
-import { cartDao, productDao } from '../models';
+import { cartDao, productDao, userDao } from '../models';
 import { resultType } from '../type';
 import { IsExistItem } from '../utils/err';
 
-const createCart = async (style_code, user_id, size, quantity) => {
+const createCart = async (style_code, user_id, size, quantity, is_member) => {
+  const isUserAuthorization = await userDao.isAuthorization(user_id);
+  if (is_member === 1 && !isUserAuthorization) {
+    const err = new Error('멤버 등록이 되지 않은 멤버입니다.');
+    err.status = 403;
+    throw err;
+  }
+
   const [check] = await cartDao.checkCart(style_code, user_id, size);
   const [checkSize] = await productDao.isExistSizes(style_code, size);
   const [checkStyleCode] = await productDao.isExistStyleCode(style_code);

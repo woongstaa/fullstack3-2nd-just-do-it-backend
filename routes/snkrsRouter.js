@@ -4,8 +4,12 @@ import auth from '../middleware/authorization';
 const router = express.Router();
 
 router.get('/detail/:style_code', snkrsController.snkrsDetail);
-router.post('/', auth.authentication, snkrsController.createUsersToLottoBox);
-router.put('/', auth.authentication, snkrsController.getWinnerList);
+router.post(
+  '/',
+  auth.userAuthentication,
+  snkrsController.createUsersToLottoBox
+);
+router.put('/', auth.userAuthentication, snkrsController.getWinnerList);
 router.get('/list', snkrsController.snkrsList);
 
 export default router;

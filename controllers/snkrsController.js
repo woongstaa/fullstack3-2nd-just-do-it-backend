@@ -3,7 +3,8 @@ import { RequiredKeys } from '../utils/err';
 
 const createUsersToLottoBox = async (req, res) => {
   try {
-    const { user_id, style_code, size } = req.body;
+    const { style_code, size } = req.body;
+    const { user_id } = req;
     const REQUIRED_KEYS = { user_id, style_code, size };
 
     const keys = new RequiredKeys(REQUIRED_KEYS);
@@ -19,7 +20,8 @@ const createUsersToLottoBox = async (req, res) => {
 
 const getWinnerList = async (req, res) => {
   try {
-    const { user_id, style_code } = req.body;
+    const { style_code } = req.body;
+    const { user_id } = req;
 
     const REQUIRED_KEYS = { user_id, style_code };
 

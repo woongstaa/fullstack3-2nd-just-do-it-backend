@@ -3,8 +3,10 @@ import { RequiredKeys } from '../utils/err';
 
 const createCart = async (req, res) => {
   try {
-    const { style_code, user_id, size, quantity } = req.body;
-    const REQUIRED_KEYS = { style_code, user_id, size, quantity };
+    const { style_code, size, quantity, is_member } = req.body;
+    const { user_id } = req;
+
+    const REQUIRED_KEYS = { style_code, user_id, size, quantity, is_member };
 
     const keys = new RequiredKeys(REQUIRED_KEYS);
     keys.verify();
@@ -13,7 +15,8 @@ const createCart = async (req, res) => {
       style_code,
       user_id,
       size,
-      quantity
+      quantity,
+      is_member
     );
 
     res.status(201).send({ message: '성공', result });
@@ -22,9 +25,33 @@ const createCart = async (req, res) => {
   }
 };
 
+// const addMemberProductsInCart = async (req, res) => {
+//   try {
+//     const { style_code, size, quantity, is_member } = req.body;
+//     const { user_id } = req;
+//     console.log(user_id);
+//     const REQUIRED_KEYS = { style_code, user_id, size, quantity, is_member };
+
+//     const keys = new RequiredKeys(REQUIRED_KEYS);
+//     keys.verify();
+
+//     const result = await cartServices.createCart(
+//       style_code,
+//       user_id,
+//       size,
+//       quantity,
+//       is_member
+//     );
+
+//     res.status(201).send({ message: '성공', result });
+//   } catch (err) {
+//     res.status(err.status || 500).send({ message: '실패', err: err.message });
+//   }
+// };
+
 const listCart = async (req, res) => {
   try {
-    const { user_id } = req.body;
+    const { user_id } = req;
 
     const REQUIRED_KEYS = { user_id };
 
@@ -41,7 +68,8 @@ const listCart = async (req, res) => {
 
 const updateCart = async (req, res) => {
   try {
-    const { user_id, cart_id, size, quantity } = req.body;
+    const { cart_id, size, quantity } = req.body;
+    const { user_id } = req;
 
     const REQUIRED_KEYS = {
       user_id,
@@ -74,7 +102,8 @@ const updateCart = async (req, res) => {
 
 const deleteCart = async (req, res) => {
   try {
-    const { cart_id, user_id } = req.body;
+    const { cart_id } = req.body;
+    const { user_id } = req;
 
     const result = await cartServices.deleteCart(cart_id, user_id);
 
@@ -86,7 +115,8 @@ const deleteCart = async (req, res) => {
 
 const updateQunantityItem = async (req, res) => {
   try {
-    const { cart_id, user_id } = req.body;
+    const { cart_id } = req.body;
+    const { user_id } = req;
 
     const REQUIRED_KEYS = { user_id, cart_id };
 
