@@ -1,21 +1,27 @@
 import { verify } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { userDao } from '../models';
-import { IsExistItem, RequiredKeys } from '../utils/err';
+import { IsExistItem } from '../utils/err';
 import { resultType } from '../type';
 
 dotenv.config();
 
-const authentication = async (req, res, next) => {
+const userAuthentication = async (req, res, next) => {
   try {
-    const token = req.body.user_id;
+    const token = req.header('token');
+    if (!token) {
+      const err = new Error('로그인을 해주세요.');
+      err.status = 401;
+      throw err;
+    }
+
     const validToken = verifyToken(token);
 
     if (validToken) {
       const [check] = await userDao.isExistUser(validToken.id[0].id);
       const isExsitUser = new IsExistItem(check, resultType, 404);
       isExsitUser.notExistErr('존재하지 않는 UserId 입니다.');
-      req.body.user_id = validToken.id[0].id;
+      req.user_id = validToken.id[0].id;
     } else {
       const err = new Error('토큰이 유효하지 않습니다.');
       err.status = 401;
@@ -27,25 +33,57 @@ const authentication = async (req, res, next) => {
   }
 };
 
-const memberProductBuying = async (req, res, next) => {
+const memberAuthentication = async (req, res, next) => {
   try {
-    const { user_id, is_member } = req.body;
-    const REQUIRED_KEYS = { user_id, is_member };
+    const token = req.header('token');
+    if (!token) {
+      const err = new Error('로그인을 해주세요.');
+      err.status = 401;
+      throw err;
+    }
 
-    const keys = new RequiredKeys(REQUIRED_KEYS);
-    keys.verify();
+    const validToken = verifyToken(token);
 
-    const isUserAuthorization = await userDao.isAuthorization(user_id);
-    if (is_member === 1 && !isUserAuthorization) {
+    if (validToken) {
+      const [check] = await userDao.isExistUser(validToken.id[0].id);
+      const isExsitUser = new IsExistItem(check, resultType, 404);
+      isExsitUser.notExistErr('존재하지 않는 UserId 입니다.');
+      req.user_id = validToken.id[0].id;
+    } else {
+      const err = new Error('토큰이 유효하지 않습니다.');
+      err.status = 401;
+      throw err;
+    }
+
+    const isUserAuthorization = await userDao.isAuthorization(req.user_id);
+    if (!isUserAuthorization) {
       const err = new Error('멤버 등록이 되지 않은 멤버입니다.');
       err.status = 403;
       throw err;
-    } else {
-      next();
     }
+
+    next();
   } catch (err) {
     res.status(err.status || 500).send({ message: '실패', err: err.message });
   }
+  // try {
+  //   const { user_id, is_member } = req.body;
+  //   const REQUIRED_KEYS = { user_id, is_member };
+
+  //   const keys = new RequiredKeys(REQUIRED_KEYS);
+  //   keys.verify();
+
+  //   const isUserAuthorization = await userDao.isAuthorization(user_id);
+  //   if (is_member === 1 && !isUserAuthorization) {
+  //     const err = new Error('멤버 등록이 되지 않은 멤버입니다.');
+  //     err.status = 403;
+  //     throw err;
+  //   } else {
+  //     next();
+  //   }
+  // } catch (err) {
+  //   res.status(err.status || 500).send({ message: '실패', err: err.message });
+  // }
 };
 
 const verifyToken = token => {
@@ -56,4 +94,4 @@ const verifyToken = token => {
   }
 };
 
-export default { authentication, memberProductBuying };
+export default { userAuthentication, memberAuthentication };
