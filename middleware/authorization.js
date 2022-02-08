@@ -66,24 +66,6 @@ const memberAuthentication = async (req, res, next) => {
   } catch (err) {
     res.status(err.status || 500).send({ message: '실패', err: err.message });
   }
-  // try {
-  //   const { user_id, is_member } = req.body;
-  //   const REQUIRED_KEYS = { user_id, is_member };
-
-  //   const keys = new RequiredKeys(REQUIRED_KEYS);
-  //   keys.verify();
-
-  //   const isUserAuthorization = await userDao.isAuthorization(user_id);
-  //   if (is_member === 1 && !isUserAuthorization) {
-  //     const err = new Error('멤버 등록이 되지 않은 멤버입니다.');
-  //     err.status = 403;
-  //     throw err;
-  //   } else {
-  //     next();
-  //   }
-  // } catch (err) {
-  //   res.status(err.status || 500).send({ message: '실패', err: err.message });
-  // }
 };
 
 const verifyToken = token => {
